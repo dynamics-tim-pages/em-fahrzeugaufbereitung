@@ -23,3 +23,8 @@ Established GitHub Pages deployment pipeline:
 - Deploy passed; live at https://dynamics-tim-pages.github.io/em-fahrzeugaufbereitung/
 - Production domain (www.em-fahrzeugaufbereitung.de) unaffected
 
+## Team Update: 2026-05-30T1751 Lightbox UI Refresh
+**Agents:** Fenster, McManus, Keaton, Hockney  
+**Status:** ✓ Complete  
+Item-driven label system: replaced static entry label with per-item gallery data passed through trigger `data-*` payload. Per-item premium labels (`Showroom-Finish`, `Reflex-Detail`) across Gallery and Lightbox components preserve layout while elevating editorial character. Maintained existing pattern (title, caption, meta, before, after) with `galleryLabels.entry` as resilient fallback. Approved by Hockney with full accessibility validation.
+

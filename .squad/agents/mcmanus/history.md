@@ -46,3 +46,8 @@ Refined YouTube embed loading state with improved UX:
 - Hides rough YouTube paint while signaling progress in dark/lime premium style
 - Build passed, changes pushed to main (commit d3ac218)
 
+## Team Update: 2026-05-30T1751 Lightbox UI Refresh
+**Agents:** Fenster, McManus, Keaton, Hockney  
+**Status:** ✓ Complete  
+Lightbox layout refinements: reduced divider density, dropped stacked mobile split border, stage split visible only from 420px+, mobile meta uses spacing instead of rule. Moved generic gallery entry label into `galleryLabels` for resilient sourcing. Initial revision addressed compartmentalization feedback but required Keaton's per-item labels for premium reading that Hockney approved.
+

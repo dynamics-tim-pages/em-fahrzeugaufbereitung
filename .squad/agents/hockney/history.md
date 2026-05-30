@@ -10,4 +10,10 @@
 
 ## Learnings
 
-(No learnings yet — first session.)
+- Hockney's UX review role is critical for premium design validation: initial feedback on over-boxed divider density and generic entry label shapes iteration toward elevated editorial character.
+- Per-item premium labels like `Showroom-Finish` and `Reflex-Detail` successfully elevate lightbox reading from generic gallery component to exclusive editorial surface while maintaining existing layout.
+
+## Session: 2026-05-30T1751 Lightbox UI Refresh (Review)
+**Agents:** Fenster, McManus, Keaton, Hockney  
+**Status:** ✓ Complete
+Conducted UX review across three iterations: identified divider density and entry label genericness; rejected McManus revision; approved Keaton's per-item label implementation with full accessibility sign-off. Final lightbox UX ready for integration.
