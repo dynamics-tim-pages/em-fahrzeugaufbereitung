@@ -17,12 +17,13 @@ import { sectionContent } from '@/data/site';
           type="button"
           class="focus-ring reveal group relative overflow-hidden rounded-[calc(var(--radius-card)+0.25rem)] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(24,29,26,0.98),rgba(10,12,11,1))] text-left shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(116,224,74,0.34)]"
           data-lightbox-trigger
-          data-title={item.alt}
-          data-caption={sectionContent.gallery.intro}
-          data-meta={`#0${item.id}`}
+          data-title={item.title}
+          data-caption={item.caption}
+          data-meta={item.meta}
+          data-entry={item.entryLabel}
           data-before={galleryLabels.before}
           data-after={galleryLabels.after}
-          aria-label={`${galleryLabels.open}: ${item.alt}`}
+          aria-label={`${galleryLabels.open}: ${item.title}`}
         >
           <div class="relative aspect-[4/5] overflow-hidden p-4 sm:p-5">
             <div class="absolute inset-0 hex-pattern opacity-60 transition duration-300 group-hover:scale-105"></div>
@@ -40,7 +41,7 @@ import { sectionContent } from '@/data/site';
             </div>
             <div class="absolute inset-x-4 bottom-4 sm:inset-x-5 sm:bottom-5">
               <p class="font-[family-name:var(--font-display)] text-[clamp(1.5rem,3vw,2rem)] uppercase leading-none tracking-tight text-[var(--color-text)]">
-                {item.alt}
+                {item.title}
               </p>
             </div>
           </div>
