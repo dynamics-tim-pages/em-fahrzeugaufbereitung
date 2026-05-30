@@ -17,6 +17,9 @@ Drive the lightbox entry label from per-item gallery data and pass it through th
 ### McManus — Lightbox Follow-up Softening (2026-05-30)
 Reduce the lightbox's internal separation by removing the extra meta divider, dropping the stacked mobile split border, and only showing the stage split cue from `420px` upward. The premium redesign already has enough structure from the shell, stage frame, and typography. On small screens, the extra divider treatment made the modal read as too many compartments instead of one composed surface.
 
+### McManus — Result Title Service-Led Framing (2026-05-30)
+No reliable vehicle models are documented in the existing content for the three current gallery entries. Result titles, metadata, and lightbox descriptions are deliberately service-based instead of inventing vehicle names. Frame results around core service offerings: Außenaufbereitung (exterior detailing), Innenraumaufbereitung (interior detailing), Keramik-Versiegelung (ceramic coating). This delivers premium and concrete results while remaining honest to current data.
+
 ## Governance
 
 - All meaningful changes require team consensus

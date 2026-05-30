@@ -51,3 +51,7 @@ Refined YouTube embed loading state with improved UX:
 **Status:** ✓ Complete  
 Lightbox layout refinements: reduced divider density, dropped stacked mobile split border, stage split visible only from 420px+, mobile meta uses spacing instead of rule. Moved generic gallery entry label into `galleryLabels` for resilient sourcing. Initial revision addressed compartmentalization feedback but required Keaton's per-item labels for premium reading that Hockney approved.
 
+## Session: 2026-05-30 Result Title Refresh
+**Status:** ✓ Complete  
+Replaced generic preparation result titles with specific, service-led framing. No reliable vehicle models in current data, so titles now center on core services: Außenaufbereitung (exterior), Innenraumaufbereitung (interior), Keramik-Versiegelung (ceramic). Wired per-item title, caption, meta, and entry labels through gallery and lightbox. Approved by Hockney as premium and placeholder-free.
+
