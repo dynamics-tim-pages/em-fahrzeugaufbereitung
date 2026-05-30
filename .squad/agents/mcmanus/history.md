@@ -36,3 +36,13 @@ Modified `getHomepageVideos()` to prioritize live RSS feed over pinned fallback:
 - Removed filter excluding pinned IDs from feed results
 - Build passed, deploy succeeded
 
+## Session: 2026-05-30T1702 Refined YouTube Loading State
+**Status:** ✓ Complete  
+Refined YouTube embed loading state with improved UX:
+- Replaced per-element inline opacity with `data-state="idle|loading|ready"` on frame wrapper
+- Loading state: poster heavily blurred/faded with soft glass card and animated dots
+- iframe invisible until `load` event, then fade-in (700ms)
+- Preserves existing autoplay/mute/hide-chrome/teardown behavior
+- Hides rough YouTube paint while signaling progress in dark/lime premium style
+- Build passed, changes pushed to main (commit d3ac218)
+
