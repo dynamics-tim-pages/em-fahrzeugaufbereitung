@@ -28,3 +28,11 @@ Rewrote YouTubeEmbed.astro component:
 - Privacy-compliant: muted autoplay requires no explicit consent
 - Build passed
 
+## Session: 2026-05-30T1642 Dynamic RSS Feed Shorts
+**Status:** ✓ Complete  
+Modified `getHomepageVideos()` to prioritize live RSS feed over pinned fallback:
+- Feed now returns latest 3 Shorts dynamically
+- Pinned videos serve as fallback only
+- Removed filter excluding pinned IDs from feed results
+- Build passed, deploy succeeded
+
