@@ -102,7 +102,8 @@ export const uiText = {
     ratingAria: '5 von 5 Sternen',
   },
   youtube: {
-    loadLabel: 'Video laden',
+    loadLabel: 'Wird geladen',
+    loadingHint: 'Startet gleich automatisch',
     badge: 'Short',
     privacyBadge: '2-Klick-Embed',
     privacyNotice:

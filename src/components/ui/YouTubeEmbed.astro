@@ -24,26 +24,26 @@ const previewAlt = `Vorschau für ${title}`;
     data-video-id={id}
     data-video-title={title}
     data-orientation={orientation}
+    data-state="idle"
+    aria-busy="false"
   >
-    <!-- Thumbnail stays as poster until iframe loads -->
     <img
       src={thumbnail}
       alt={previewAlt}
       width={540}
       height={960}
       loading="lazy"
-      class="absolute inset-0 size-full object-cover opacity-80 transition-opacity duration-500"
+      class="absolute inset-0 z-[1] size-full object-cover opacity-80 transition-[opacity,transform,filter] duration-700 ease-out"
       data-youtube-poster
       onerror="this.onerror=null;this.src='/images/yt/placeholder.svg';"
     />
     <div
-      class="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,11,0.08),rgba(10,12,11,0.8))] transition-opacity duration-500"
+      class="absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(10,12,11,0.08),rgba(10,12,11,0.8))] transition-[opacity,transform] duration-700 ease-out"
       data-youtube-gradient
     ></div>
 
-    <!-- Title overlay — fades out once the iframe is playing -->
     <div
-      class="absolute inset-0 flex flex-col justify-between p-5 transition-opacity duration-500"
+      class="absolute inset-0 z-[3] flex flex-col justify-between p-5 transition-[opacity,transform] duration-700 ease-out"
       data-youtube-overlay
     >
       <div class="flex items-start justify-between gap-3">
@@ -58,8 +58,152 @@ const previewAlt = `Vorschau für ${title}`;
         {title}
       </p>
     </div>
+
+    <div
+      class="pointer-events-none absolute inset-0 z-[4] flex items-end p-4 opacity-0 transition-opacity duration-500 ease-out sm:p-5"
+      data-youtube-loading
+      aria-hidden="true"
+    >
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,11,0.18),rgba(10,12,11,0.82))]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,194,54,0.14),transparent_55%)]"></div>
+
+      <div class="relative w-full overflow-hidden rounded-[1rem] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] px-4 py-3 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.9)] backdrop-blur-md">
+        <div class="absolute inset-0 opacity-0" data-youtube-loading-sheen></div>
+
+        <div class="relative flex items-center justify-between gap-4">
+          <div class="space-y-1">
+            <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[rgba(116,224,74,0.82)]">
+              {uiText.youtube.loadLabel}
+            </p>
+            <p class="text-xs text-[rgba(244,247,243,0.72)] sm:text-sm">
+              {uiText.youtube.loadingHint}
+            </p>
+          </div>
+
+          <span class="inline-flex items-center gap-1.5" aria-hidden="true">
+            <span
+              class="size-1.5 rounded-full bg-[rgba(116,224,74,0.72)] opacity-70"
+              data-youtube-loading-dot
+              style="animation-delay: 0ms;"
+            ></span>
+            <span
+              class="size-1.5 rounded-full bg-[rgba(116,224,74,0.72)] opacity-70"
+              data-youtube-loading-dot
+              style="animation-delay: 120ms;"
+            ></span>
+            <span
+              class="size-1.5 rounded-full bg-[rgba(116,224,74,0.72)] opacity-70"
+              data-youtube-loading-dot
+              style="animation-delay: 240ms;"
+            ></span>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<style is:inline>
+  @keyframes youtube-loading-sheen {
+    0% {
+      transform: translateX(-135%);
+      opacity: 0;
+    }
+
+    35% {
+      opacity: 0.4;
+    }
+
+    100% {
+      transform: translateX(135%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes youtube-loading-dot {
+    0%,
+    80%,
+    100% {
+      transform: translateY(0) scale(0.92);
+      opacity: 0.35;
+    }
+
+    40% {
+      transform: translateY(-2px) scale(1);
+      opacity: 1;
+    }
+  }
+
+  [data-youtube-frame] {
+    isolation: isolate;
+  }
+
+  [data-youtube-frame] iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0;
+    transition: opacity 700ms ease;
+  }
+
+  [data-youtube-frame][data-state='loading'] [data-youtube-poster] {
+    opacity: 0.12;
+    transform: scale(1.035);
+    filter: blur(14px) saturate(0.72);
+  }
+
+  [data-youtube-frame][data-state='loading'] [data-youtube-gradient] {
+    opacity: 0.96;
+  }
+
+  [data-youtube-frame][data-state='loading'] [data-youtube-overlay] {
+    opacity: 0.18;
+    transform: translateY(12px);
+  }
+
+  [data-youtube-frame][data-state='loading'] [data-youtube-loading] {
+    opacity: 1;
+  }
+
+  [data-youtube-frame][data-state='loading'] [data-youtube-loading-sheen] {
+    background: linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.14) 50%, transparent 82%);
+    animation: youtube-loading-sheen 2.8s ease-in-out infinite;
+  }
+
+  [data-youtube-frame][data-state='loading'] [data-youtube-loading-dot] {
+    animation: youtube-loading-dot 1.4s ease-in-out infinite;
+  }
+
+  [data-youtube-frame][data-state='ready'] iframe {
+    opacity: 1;
+  }
+
+  [data-youtube-frame][data-state='ready'] [data-youtube-poster],
+  [data-youtube-frame][data-state='ready'] [data-youtube-gradient],
+  [data-youtube-frame][data-state='ready'] [data-youtube-overlay],
+  [data-youtube-frame][data-state='ready'] [data-youtube-loading] {
+    opacity: 0;
+  }
+
+  [data-youtube-frame][data-state='ready'] [data-youtube-overlay] {
+    transform: translateY(16px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-youtube-frame] iframe,
+    [data-youtube-frame] [data-youtube-poster],
+    [data-youtube-frame] [data-youtube-gradient],
+    [data-youtube-frame] [data-youtube-overlay],
+    [data-youtube-frame] [data-youtube-loading],
+    [data-youtube-frame] [data-youtube-loading-sheen],
+    [data-youtube-frame] [data-youtube-loading-dot] {
+      animation: none !important;
+      transition-duration: 1ms !important;
+    }
+  }
+</style>
 
 <script is:inline>
   (() => {
@@ -78,8 +222,14 @@ const previewAlt = `Vorschau für ${title}`;
         /** @type {HTMLIFrameElement|null} */
         let iframe = null;
 
+        function setState(state) {
+          frame.dataset.state = state;
+          frame.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
+        }
+
         function injectIframe() {
           if (iframe) return;
+          setState('loading');
           iframe = document.createElement('iframe');
           const params = isPortrait
             ? `autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${videoId}&controls=0&playsinline=1&iv_load_policy=3&disablekb=1&showinfo=0`
@@ -88,12 +238,9 @@ const previewAlt = `Vorschau für ${title}`;
           iframe.title = videoTitle;
           iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
           iframe.allowFullscreen = true;
-          iframe.loading = 'lazy';
+          iframe.loading = 'eager';
           iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-          iframe.className = 'absolute inset-0 size-full border-0';
-          iframe.style.opacity = '0';
-          iframe.style.transition = 'opacity 700ms ease';
-          iframe.addEventListener('load', fadeOverlays, { once: true });
+          iframe.addEventListener('load', handleIframeLoad, { once: true });
           frame.appendChild(iframe);
         }
 
@@ -101,28 +248,11 @@ const previewAlt = `Vorschau für ${title}`;
           if (!iframe) return;
           iframe.remove();
           iframe = null;
-          restoreOverlays();
+          setState('idle');
         }
 
-        function fadeOverlays() {
-          [
-            frame.querySelector('[data-youtube-poster]'),
-            frame.querySelector('[data-youtube-gradient]'),
-            frame.querySelector('[data-youtube-overlay]'),
-          ].forEach((el) => {
-            if (el instanceof HTMLElement) el.style.opacity = '0';
-          });
-          if (iframe) iframe.style.opacity = '1';
-        }
-
-        function restoreOverlays() {
-          [
-            frame.querySelector('[data-youtube-poster]'),
-            frame.querySelector('[data-youtube-gradient]'),
-            frame.querySelector('[data-youtube-overlay]'),
-          ].forEach((el) => {
-            if (el instanceof HTMLElement) el.style.opacity = '';
-          });
+        function handleIframeLoad() {
+          setState('ready');
         }
 
         if (!('IntersectionObserver' in window)) {
