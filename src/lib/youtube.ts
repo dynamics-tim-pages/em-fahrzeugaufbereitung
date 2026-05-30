@@ -106,11 +106,9 @@ async function isShort(id: string): Promise<boolean> {
   }
 }
 
-// Liefert NUR Shorts aus dem RSS-Feed, ohne die bereits gepinnten IDs.
+// Liefert die neuesten Shorts aus dem RSS-Feed (ohne Pinned-Filter).
 export async function getFeedShorts(): Promise<VideoItem[]> {
   if (!youtube.showFeed) return [];
-
-  const pinnedIds = new Set(youtube.pinned.map((video) => video.id));
 
   try {
     const xml = await fetch(youtube.rss).then((response) => response.text());
@@ -120,7 +118,7 @@ export async function getFeedShorts(): Promise<VideoItem[]> {
         id: extractTag(entry, 'yt:videoId'),
         title: decodeXml(extractTag(entry, 'title')),
       }))
-      .filter((item) => item.id && !pinnedIds.has(item.id));
+      .filter((item) => item.id);
 
     const result: VideoItem[] = [];
     for (const item of entries) {
@@ -142,7 +140,21 @@ export async function getFeedShorts(): Promise<VideoItem[]> {
 
 export async function getHomepageVideos(): Promise<VideoItem[]> {
   const feedShorts = await getFeedShorts();
-  const videos = [...youtube.pinned, ...feedShorts];
+
+  let videos: VideoItem[];
+  if (feedShorts.length >= youtube.feedCount) {
+    // Enough fresh feed results — use only those
+    videos = feedShorts.slice(0, youtube.feedCount);
+  } else if (feedShorts.length > 0) {
+    // Partial feed — fill remaining slots from pinned fallbacks
+    const used = new Set(feedShorts.map((v) => v.id));
+    const fallback = (youtube.pinned as unknown as VideoItem[]).filter((v) => !used.has(v.id));
+    videos = [...feedShorts, ...fallback].slice(0, youtube.feedCount);
+  } else {
+    // Feed empty or failed — use pinned as fallback
+    videos = youtube.pinned as unknown as VideoItem[];
+  }
+
   await cacheThumbnails(videos);
   return videos;
 }
