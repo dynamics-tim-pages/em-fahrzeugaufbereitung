@@ -1,0 +1,91 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { heroContent, sectionContent, site, uiText } from '@/data/site';
+import { services } from '@/data/services';
+---
+
+<section id="top" class="relative isolate overflow-hidden" aria-labelledby="hero-title">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.24),transparent_30%),linear-gradient(180deg,rgba(18,23,20,1),rgba(10,12,11,1))]"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,12,11,0.08),rgba(10,12,11,0.88)_55%,rgba(10,12,11,1))]"></div>
+  <div class="hex-pattern"></div>
+
+  <div class="relative mx-auto flex min-h-[92vh] max-w-[var(--container-max)] items-center px-[var(--gutter)] pb-16 pt-28 sm:pt-32 lg:pt-36">
+    <div class="grid w-full gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,28rem)] lg:items-center">
+      <div class="max-w-4xl space-y-8">
+        <div class="space-y-5">
+          <p class="fade-up text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
+            {heroContent.eyebrow}
+          </p>
+          <h1
+            id="hero-title"
+            class="fade-up stagger-1 font-[family-name:var(--font-display)] text-display uppercase tracking-tight text-[var(--color-text)]"
+          >
+            {heroContent.title.leading}
+            <span class="block text-[var(--color-green)]">{heroContent.title.accent}</span>
+          </h1>
+          <p class="fade-up stagger-2 max-w-2xl text-body-lg text-[var(--color-text-muted)]">
+            {heroContent.subline}
+          </p>
+        </div>
+
+        <div class="fade-up stagger-3 flex flex-col gap-4 sm:flex-row">
+          <Button href={site.whatsapp}>{heroContent.primaryCta}</Button>
+          <Button href={site.phoneHref} variant="ghost">{heroContent.secondaryCta}</Button>
+        </div>
+
+        <div class="fade-up stagger-4 flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-muted)]">
+          <span class="inline-flex items-center gap-1 text-[var(--color-green)]" aria-label={uiText.hero.ratingAria}>
+            {Array.from({ length: 5 }).map(() => (
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="size-4 fill-current">
+                <path d="m12 3.5 2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 17l-5.3 2.8 1-5.8-4.2-4.1 5.9-.9L12 3.5Z" />
+              </svg>
+            ))}
+          </span>
+          <span>{heroContent.trustLine}</span>
+        </div>
+      </div>
+
+      <aside class="reveal relative overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] border border-[rgba(255,255,255,0.08)] bg-[rgba(17,21,19,0.78)] p-6 shadow-[var(--shadow-card)] backdrop-blur-md lg:ml-auto">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.16),transparent_48%)]"></div>
+        <div class="relative space-y-6">
+          <div class="space-y-2">
+            <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
+              {sectionContent.services.eyebrow}
+            </p>
+            <p class="font-[family-name:var(--font-display)] text-[clamp(1.75rem,4vw,2.5rem)] uppercase leading-none tracking-tight text-[var(--color-text)]">
+              {site.name}
+            </p>
+            <p class="text-sm text-[var(--color-text-muted)]">{site.address.city}</p>
+          </div>
+
+          <div class="grid gap-3">
+            {services.slice(0, 3).map((service) => (
+              <div class="rounded-[var(--radius-card)] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-sm text-[var(--color-text-muted)]">
+                {service.title}
+              </div>
+            ))}
+          </div>
+
+          <dl class="grid gap-4 border-t border-[rgba(255,255,255,0.08)] pt-4 sm:grid-cols-2">
+            <div>
+              <dt class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-faint)]">
+                {uiText.contact.addressLabel}
+              </dt>
+              <dd class="mt-2 text-sm text-[var(--color-text-muted)]">{site.address.street}</dd>
+            </div>
+            <div>
+              <dt class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-faint)]">
+                {uiText.contact.hoursLabel}
+              </dt>
+              <dd class="mt-2 text-sm text-[var(--color-text-muted)]">{site.hours[0]?.time}</dd>
+            </div>
+          </dl>
+
+          <div class="rounded-[var(--radius-card)] border border-[rgba(116,224,74,0.18)] bg-[rgba(91,194,54,0.08)] px-4 py-4 text-sm text-[var(--color-text)]">
+            {sectionContent.services.outro}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

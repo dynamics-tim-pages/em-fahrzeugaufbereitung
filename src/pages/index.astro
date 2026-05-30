@@ -1,75 +1,24 @@
 ---
-import Section from '@/components/Section.astro';
+import Contact from '@/components/Contact.astro';
+import Footer from '@/components/Footer.astro';
+import Gallery from '@/components/Gallery.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import Services from '@/components/Services.astro';
+import StickyCta from '@/components/StickyCta.astro';
+import Videos from '@/components/Videos.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-  title="Fahrzeugaufbereitung - Astro Starter"
-  description="Minimaler Astro-Starter fuer eine Landingpage zur Fahrzeugaufbereitung."
->
-  <main>
-    <section class="px-6 pb-20 pt-24 md:px-10 md:pb-24 md:pt-32">
-      <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
-        <div class="flex max-w-3xl flex-col gap-6">
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Barebones Astro Setup
-          </p>
-          <h1 class="text-4xl font-semibold tracking-tight text-slate-950 md:text-6xl">
-            Starter fuer deine Landingpage zur Fahrzeugaufbereitung
-          </h1>
-          <p class="text-lg leading-8 text-slate-600 md:text-xl">
-            Die Struktur steht: Layout, globale Styles, Tailwind und eine saubere Astro-Basis.
-            Dein Design-System, Branding und die finalen Inhalte kannst du darauf direkt aufbauen.
-          </p>
-        </div>
-
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Enthalten
-          </p>
-          <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-600">
-            <li>Astro mit TypeScript strict</li>
-            <li>Tailwind ueber Vite eingebunden</li>
-            <li>Layout- und Komponentenstruktur als Startpunkt</li>
-            <li>Minimale Platzhalter ohne fertiges Design</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <Section
-      id="leistungen"
-      eyebrow="Inhalt"
-      title="Bereit fuer deine Sections, Komponenten und Conversion-Elemente"
-      intro="Die Seite ist bewusst minimal gehalten, damit du Header, Hero, Angebotsmodule, Vertrauenselemente und CTA-Bloecke in deinem eigenen Stil aufbauen kannst."
-    >
-      <div class="grid gap-6 md:grid-cols-3">
-        <article class="rounded-3xl border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-950">Layout</h3>
-          <p class="mt-3 text-sm leading-6 text-slate-600">
-            BaseLayout als zentraler Einstieg fuer Meta-Daten, globale Styles und spaetere gemeinsame UI-Elemente.
-          </p>
-        </article>
-        <article class="rounded-3xl border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-950">Komponenten</h3>
-          <p class="mt-3 text-sm leading-6 text-slate-600">
-            Eine einfache Section-Komponente ist schon vorhanden und kann durch dein Design-System ersetzt oder erweitert werden.
-          </p>
-        </article>
-        <article class="rounded-3xl border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-950">Styling</h3>
-          <p class="mt-3 text-sm leading-6 text-slate-600">
-            Tailwind ist aktiv, aber ohne vorgegebenes visuelles Konzept, damit du frei mit Tokens, Utilities und Komponenten arbeiten kannst.
-          </p>
-        </article>
-      </div>
-    </Section>
-
-    <Section
-      id="naechste-schritte"
-      eyebrow="Naechste Schritte"
-      title="Guter Ausgangspunkt fuer Hero, Leistungen, Vorher-Nachher und Kontakt"
-      intro="Wenn du im naechsten Schritt dein Design-System einbringst, kannst du direkt weitere Komponenten unter src/components und neue Seiten unter src/pages anlegen."
-    />
+<BaseLayout>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <Services />
+    <Gallery />
+    <Videos />
+    <Contact />
   </main>
+  <Footer />
+  <StickyCta />
 </BaseLayout>

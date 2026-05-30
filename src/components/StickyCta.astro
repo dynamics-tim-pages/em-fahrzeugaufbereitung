@@ -1,0 +1,15 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { heroContent, site } from '@/data/site';
+---
+
+<div class="fixed inset-x-0 bottom-0 z-40 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(10,12,11,0.88)] px-[var(--gutter)] py-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] backdrop-blur-xl md:hidden">
+  <div class="mx-auto flex max-w-[var(--container-max)] gap-3">
+    <Button href={site.whatsapp} class="min-w-0 flex-1 justify-center px-4 py-3 text-[13px]">
+      {heroContent.primaryCta}
+    </Button>
+    <Button href={site.phoneHref} variant="ghost" class="min-w-0 flex-1 justify-center px-4 py-3 text-[13px]">
+      {heroContent.secondaryCta}
+    </Button>
+  </div>
+</div>

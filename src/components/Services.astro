@@ -1,0 +1,22 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ServiceCard from '@/components/ui/ServiceCard.astro';
+import { sectionContent } from '@/data/site';
+import { services } from '@/data/services';
+---
+
+<section id="leistungen" class="scroll-mt-28 py-[var(--space-section)]" aria-labelledby="services-title">
+  <div class="mx-auto max-w-[var(--container-max)] space-y-12 px-[var(--gutter)]">
+    <SectionHeading id="services-title" eyebrow={sectionContent.services.eyebrow} title={sectionContent.services.title}>
+      <p class="mt-6 max-w-2xl text-body text-[var(--color-text-muted)]">{sectionContent.services.outro}</p>
+    </SectionHeading>
+
+    <div class="grid gap-[var(--grid-gap)] md:grid-cols-2 xl:grid-cols-3">
+      {services.map((service, index) => (
+        <div class:list={[index > 0 && 'stagger-1', index > 1 && 'stagger-2']}>
+          <ServiceCard {...service} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

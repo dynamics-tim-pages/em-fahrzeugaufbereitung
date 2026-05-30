@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`clip-hex relative inline-grid size-18 place-items-center bg-[linear-gradient(135deg,rgba(116,224,74,0.95),rgba(20,54,28,0.72))] p-px shadow-[0_0_28px_rgba(91,194,54,0.24)] ${className}`}>
+  <div class="clip-hex grid size-full place-items-center bg-[linear-gradient(180deg,rgba(24,29,26,0.98),rgba(17,21,19,0.98))] text-[var(--color-green)]">
+    <slot />
+  </div>
+</div>

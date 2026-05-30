@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title desc">
+  <title id="title">YouTube Vorschauplatzhalter</title>
+  <desc id="desc">Dunkler Platzhalter mit grünem Play-Akzent.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#151917" />
+      <stop offset="100%" stop-color="#090b0a" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="40%">
+      <stop offset="0%" stop-color="#74e04a" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#74e04a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="900" height="1600" fill="url(#bg)" rx="56" />
+  <rect width="900" height="1600" fill="url(#glow)" rx="56" />
+  <g fill="none" stroke="#5bc236" stroke-opacity="0.25" stroke-width="6">
+    <path d="M225 92h450l116 208-116 208H225L108 300 225 92Z" />
+    <path d="M225 602h450l116 208-116 208H225L108 810l117-208Z" />
+    <path d="M225 1112h450l116 208-116 208H225l-117-208 117-208Z" />
+  </g>
+  <circle cx="450" cy="800" r="124" fill="#5bc236" opacity="0.92" />
+  <path d="M408 724 548 800 408 876Z" fill="#0a0c0b" />
+</svg>

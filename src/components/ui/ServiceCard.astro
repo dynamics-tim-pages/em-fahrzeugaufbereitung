@@ -1,0 +1,34 @@
+---
+import HexIcon from './HexIcon.astro';
+
+interface Props {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+const { title, desc, icon } = Astro.props;
+
+const icons: Record<string, string> = {
+  sparkles: '<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Z" stroke-linejoin="round"/><path d="M5 17l.9 2.1L8 20l-2.1.9L5 23l-.9-2.1L2 20l2.1-.9L5 17Zm14-2 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z" stroke-linejoin="round"/>',
+  droplets: '<path d="M12 3c2.8 3.4 5 6.2 5 9a5 5 0 1 1-10 0c0-2.8 2.2-5.6 5-9Z" stroke-linejoin="round"/><path d="M17 7c1.9 2.4 3 4.4 3 6.2" stroke-linecap="round"/>',
+  shield: '<path d="M12 3 5 6v5c0 4 2.5 7.7 7 10 4.5-2.3 7-6 7-10V6l-7-3Z" stroke-linejoin="round"/><path d="m9.5 12 1.7 1.7 3.3-3.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  eraser: '<path d="m8 6 10 10" stroke-linecap="round"/><path d="M5 13.5 12.5 6a2 2 0 0 1 2.8 0l3.2 3.2a2 2 0 0 1 0 2.8L11 19.5H7.5L5 17v-3.5Z" stroke-linejoin="round"/><path d="M12 19.5h7" stroke-linecap="round"/>',
+  armchair: '<path d="M7 11V8a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v3" stroke-linecap="round"/><path d="M5 11h14v5H5z" stroke-linejoin="round"/><path d="M7 16v3M17 16v3M3 10v4a2 2 0 0 0 2 2M21 10v4a2 2 0 0 1-2 2" stroke-linecap="round"/>',
+  wind: '<path d="M4 8h9a2.5 2.5 0 1 0-2.4-3" stroke-linecap="round"/><path d="M3 12h13a2 2 0 1 1-1.9 2.6" stroke-linecap="round"/><path d="M6 16h8a2 2 0 1 1-1.8 2.9" stroke-linecap="round"/>'
+};
+---
+
+<article class="reveal rounded-[calc(var(--radius-card)+0.25rem)] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(24,29,26,0.98),rgba(12,15,13,0.98))] p-6 shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(116,224,74,0.35)] hover:shadow-[0_32px_60px_-32px_rgba(91,194,54,0.35)]">
+  <div class="space-y-5">
+    <HexIcon>
+      <svg aria-hidden="true" viewBox="0 0 24 24" class="size-8" fill="none" stroke="currentColor" stroke-width="1.7" set:html={icons[icon] ?? icons.sparkles}></svg>
+    </HexIcon>
+    <div class="space-y-3">
+      <h3 class="font-[family-name:var(--font-display)] text-h3 uppercase tracking-tight text-[var(--color-text)]">
+        {title}
+      </h3>
+      <p class="text-sm leading-7 text-[var(--color-text-muted)]">{desc}</p>
+    </div>
+  </div>
+</article>

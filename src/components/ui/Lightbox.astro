@@ -1,0 +1,150 @@
+---
+import { galleryLabels } from '@/data/gallery';
+import { sectionContent } from '@/data/site';
+---
+
+<dialog
+  data-gallery-lightbox
+  class="w-[min(92vw,72rem)] max-w-none overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] border border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-text)] shadow-[0_30px_90px_-20px_rgba(0,0,0,0.82)] backdrop:bg-[rgba(4,6,5,0.84)] backdrop:backdrop-blur-md"
+>
+  <div class="relative">
+    <button
+      type="button"
+      class="focus-ring absolute right-4 top-4 z-10 inline-flex size-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[rgba(10,12,11,0.82)] text-[var(--color-text)]"
+      data-lightbox-close
+      aria-label={galleryLabels.close}
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M6 6 18 18M18 6 6 18" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <div class="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)]">
+      <div class="relative min-h-[24rem] overflow-hidden bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.18),transparent_38%),linear-gradient(180deg,rgba(17,21,19,1),rgba(10,12,11,1))] p-6 sm:p-8">
+        <div class="absolute inset-0 hex-pattern opacity-70"></div>
+        <div class="relative grid h-full gap-4 sm:grid-cols-2">
+          <div class="rounded-[var(--radius-card)] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-5">
+            <span data-lightbox-before class="inline-flex rounded-full border border-[var(--color-border)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-text-muted)]"></span>
+          </div>
+          <div class="rounded-[var(--radius-card)] border border-[rgba(116,224,74,0.24)] bg-[rgba(91,194,54,0.08)] p-5 shadow-[0_0_24px_rgba(91,194,54,0.12)]">
+            <span data-lightbox-after class="inline-flex rounded-full border border-[rgba(116,224,74,0.34)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green)]"></span>
+          </div>
+        </div>
+        <div class="absolute inset-x-6 bottom-6 sm:inset-x-8 sm:bottom-8">
+          <p data-lightbox-caption class="max-w-xl text-sm leading-7 text-[var(--color-text-muted)]"></p>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-between gap-8 p-6 sm:p-8">
+        <div class="space-y-4">
+          <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">{sectionContent.gallery.eyebrow}</p>
+          <h3 data-lightbox-title class="font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,3rem)] uppercase leading-none tracking-tight text-[var(--color-text)]"></h3>
+          <p data-lightbox-meta class="text-sm leading-7 text-[var(--color-text-muted)]"></p>
+        </div>
+
+        <button
+          type="button"
+          class="focus-ring inline-flex w-full items-center justify-center rounded-[var(--radius-btn)] border border-[var(--color-green)] px-5 py-3 text-sm font-semibold text-[var(--color-green)] transition hover:bg-[rgba(91,194,54,0.08)]"
+          data-lightbox-close
+        >
+          {galleryLabels.close}
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script is:inline>
+  (() => {
+    const dialog = document.querySelector('[data-gallery-lightbox]');
+    if (!(dialog instanceof HTMLDialogElement) || dialog.dataset.bound === 'true') return;
+    dialog.dataset.bound = 'true';
+
+    const title = dialog.querySelector('[data-lightbox-title]');
+    const caption = dialog.querySelector('[data-lightbox-caption]');
+    const meta = dialog.querySelector('[data-lightbox-meta]');
+    const before = dialog.querySelector('[data-lightbox-before]');
+    const after = dialog.querySelector('[data-lightbox-after]');
+    const closeButtons = [...dialog.querySelectorAll('[data-lightbox-close]')];
+    let lastFocused = null;
+
+    const focusableElements = () =>
+      [...dialog.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')].filter(
+        (element) => !element.hasAttribute('disabled'),
+      );
+
+    const close = () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+      document.body.classList.remove('overflow-hidden');
+      if (lastFocused instanceof HTMLElement) {
+        lastFocused.focus();
+      }
+    };
+
+    const open = (trigger) => {
+      lastFocused = trigger;
+      const itemTitle = trigger.dataset.title ?? '';
+      const itemCaption = trigger.dataset.caption ?? '';
+      const itemMeta = trigger.dataset.meta ?? '';
+      const beforeLabel = trigger.dataset.before ?? '';
+      const afterLabel = trigger.dataset.after ?? '';
+
+      if (title) title.textContent = itemTitle;
+      if (caption) caption.textContent = itemCaption;
+      if (meta) meta.textContent = itemMeta;
+      if (before) before.textContent = beforeLabel;
+      if (after) after.textContent = afterLabel;
+
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+
+      document.body.classList.add('overflow-hidden');
+      requestAnimationFrame(() => {
+        const firstButton = closeButtons[0];
+        if (firstButton instanceof HTMLElement) {
+          firstButton.focus();
+        }
+      });
+    };
+
+    document.querySelectorAll('[data-lightbox-trigger]').forEach((trigger) => {
+      if (!(trigger instanceof HTMLButtonElement) || trigger.dataset.bound === 'true') return;
+      trigger.dataset.bound = 'true';
+      trigger.addEventListener('click', () => open(trigger));
+    });
+
+    closeButtons.forEach((button) => button.addEventListener('click', close));
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        close();
+      }
+    });
+
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      close();
+    });
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+
+      const focusable = focusableElements();
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+  })();
+</script>

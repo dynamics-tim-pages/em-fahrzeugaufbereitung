@@ -1,0 +1,136 @@
+---
+import { brand, site, uiText } from '@/data/site';
+import Button from '@/components/ui/Button.astro';
+---
+
+<header class="fixed inset-x-0 top-0 z-50" data-site-header>
+  <div class="mx-auto max-w-[var(--container-max)] px-[var(--gutter)] pt-4 sm:pt-5">
+    <div
+      class="flex items-center justify-between gap-4 rounded-[calc(var(--radius-pill)+0.75rem)] border border-transparent px-4 py-3 transition duration-300 data-[menu-open=true]:border-[var(--color-border)] data-[menu-open=true]:bg-[rgba(10,12,11,0.92)] data-[menu-open=true]:backdrop-blur-xl data-[scrolled=true]:border-[var(--color-border)] data-[scrolled=true]:bg-[rgba(10,12,11,0.82)] data-[scrolled=true]:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.85)] data-[scrolled=true]:backdrop-blur-xl"
+      data-nav-shell
+    >
+      <a href="#top" class="focus-ring inline-flex items-center gap-3 rounded-full px-2 py-1.5">
+        <span class="inline-flex items-center gap-0.5 rounded-full border border-[var(--color-border)] bg-[rgba(17,21,19,0.92)] px-3 py-2 shadow-[0_0_24px_rgba(91,194,54,0.14)]">
+          <span class="font-[family-name:var(--font-display)] text-2xl uppercase leading-none text-[var(--color-text)]">
+            {brand.monogramLeading}
+          </span>
+          <span class="font-[family-name:var(--font-display)] text-2xl uppercase leading-none text-[var(--color-green)]">
+            {brand.monogramAccent}
+          </span>
+        </span>
+        <span class="hidden min-[420px]:block">
+          <span class="block font-[family-name:var(--font-display)] text-xl uppercase leading-none tracking-tight text-[var(--color-text)]">
+            {brand.wordmark}
+          </span>
+          <span class="mt-1 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+            {brand.ownerline}
+          </span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-1 lg:flex" aria-label={uiText.header.navLabel}>
+        {site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="focus-ring rounded-full px-4 py-2 text-sm font-medium text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="hidden lg:block">
+        <Button href="#kontakt">{uiText.header.cta}</Button>
+      </div>
+
+      <button
+        type="button"
+        class="focus-ring inline-flex size-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-[rgba(17,21,19,0.94)] text-[var(--color-text)] lg:hidden"
+        aria-label={uiText.header.menuOpen}
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+        data-menu-toggle
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-navigation" hidden class="fixed inset-0 bg-[rgba(4,6,5,0.9)] backdrop-blur-xl lg:hidden" data-mobile-menu>
+    <div class="mx-auto flex min-h-full max-w-[var(--container-max)] flex-col px-[var(--gutter)] pb-10 pt-5">
+      <div class="mb-12 flex items-center justify-between rounded-[calc(var(--radius-pill)+0.75rem)] border border-[var(--color-border)] bg-[rgba(10,12,11,0.88)] px-4 py-3">
+        <span class="font-[family-name:var(--font-display)] text-2xl uppercase tracking-tight text-[var(--color-text)]">
+          {brand.wordmark}
+        </span>
+        <button
+          type="button"
+          class="focus-ring inline-flex size-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-[rgba(17,21,19,0.92)]"
+          aria-label={uiText.header.menuClose}
+          data-menu-close
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 6 18 18M18 6 6 18" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="flex flex-1 flex-col justify-center gap-4" aria-label={uiText.header.mobileNavLabel}>
+        {site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="focus-ring rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[rgba(17,21,19,0.72)] px-6 py-5 font-[family-name:var(--font-display)] text-[clamp(2rem,10vw,3.75rem)] uppercase tracking-tight text-[var(--color-text)]"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="mt-10">
+        <Button href="#kontakt" class="w-full justify-center">{uiText.header.cta}</Button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (() => {
+    const header = document.querySelector('[data-site-header]');
+    const shell = header?.querySelector('[data-nav-shell]');
+    const toggle = header?.querySelector('[data-menu-toggle]');
+    const closeButton = header?.querySelector('[data-menu-close]');
+    const menu = header?.querySelector('[data-mobile-menu]');
+
+    if (!(shell instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) {
+      return;
+    }
+
+    if (header.dataset.bound === 'true') return;
+    header.dataset.bound = 'true';
+
+    const setScrolled = () => {
+      shell.dataset.scrolled = window.scrollY > 24 ? 'true' : 'false';
+    };
+
+    const setMenuState = (open) => {
+      shell.dataset.menuOpen = open ? 'true' : 'false';
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      document.body.classList.toggle('overflow-hidden', open);
+    };
+
+    toggle.addEventListener('click', () => setMenuState(menu.hidden));
+    closeButton?.addEventListener('click', () => setMenuState(false));
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuState(false)));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setMenuState(false);
+      }
+    });
+
+    window.addEventListener('scroll', setScrolled, { passive: true });
+    setScrolled();
+  })();
+</script>

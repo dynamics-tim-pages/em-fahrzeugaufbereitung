@@ -1,0 +1,113 @@
+---
+import Button from '@/components/ui/Button.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { heroContent, sectionContent, site, uiText } from '@/data/site';
+---
+
+<section id="kontakt" class="scroll-mt-28 py-[var(--space-section)]" aria-labelledby="contact-title">
+  <div class="mx-auto max-w-[var(--container-max)] space-y-12 px-[var(--gutter)]">
+    <SectionHeading id="contact-title" eyebrow={sectionContent.contact.eyebrow} title={sectionContent.contact.title} />
+
+    <div class="grid gap-[var(--grid-gap)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <article class="reveal rounded-[calc(var(--radius-card)+0.25rem)] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(24,29,26,0.98),rgba(10,12,11,0.98))] p-6 shadow-[var(--shadow-card)] sm:p-8">
+        <div class="space-y-8">
+          <div class="space-y-3">
+            <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
+              {sectionContent.contact.infoTitle}
+            </p>
+            <address class="not-italic text-body text-[var(--color-text-muted)]">
+              {site.address.street}<br />
+              {site.address.zip} {site.address.city}
+            </address>
+          </div>
+
+          <dl class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <dt class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-faint)]">
+                {uiText.contact.phoneLabel}
+              </dt>
+              <dd class="mt-2 text-body text-[var(--color-text)]">
+                <a href={site.phoneHref} class="focus-ring rounded-sm text-[var(--color-text)] transition hover:text-[var(--color-green)]">
+                  {site.phoneDisplay}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-faint)]">
+                {uiText.contact.whatsappLabel}
+              </dt>
+              <dd class="mt-2 text-body text-[var(--color-text)]">
+                <a href={site.whatsapp} class="focus-ring rounded-sm text-[var(--color-text)] transition hover:text-[var(--color-green)]">
+                  {heroContent.primaryCta}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-faint)]">
+                {uiText.contact.emailLabel}
+              </dt>
+              <dd class="mt-2 break-all text-body text-[var(--color-text)]">
+                <a href={`mailto:${site.email}`} class="focus-ring rounded-sm text-[var(--color-text)] transition hover:text-[var(--color-green)]">
+                  {site.email}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-faint)]">
+                {uiText.contact.hoursLabel}
+              </dt>
+              <dd class="mt-2 text-body text-[var(--color-text-muted)]">{site.hours[2]?.time}</dd>
+            </div>
+          </dl>
+
+          <div class="rounded-[var(--radius-card)] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-4">
+            <table class="w-full text-left text-sm text-[var(--color-text-muted)]">
+              <tbody>
+                {site.hours.map((entry) => (
+                  <tr class="border-b border-[rgba(255,255,255,0.06)] last:border-b-0">
+                    <th scope="row" class="py-3 pr-4 font-medium text-[var(--color-text)]">{entry.day}</th>
+                    <td class="py-3">{entry.time}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <article class="reveal rounded-[calc(var(--radius-card)+0.25rem)] border border-[rgba(116,224,74,0.22)] bg-[linear-gradient(180deg,rgba(17,21,19,1),rgba(10,12,11,1))] p-6 shadow-[0_26px_70px_-30px_rgba(91,194,54,0.28)] sm:p-8">
+        <div class="space-y-8">
+          <div class="space-y-3">
+            <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
+              {sectionContent.contact.actionTitle}
+            </p>
+            <p class="max-w-xl text-body text-[var(--color-text-muted)]">{heroContent.subline}</p>
+          </div>
+
+          <div class="flex flex-col gap-4 sm:flex-row">
+            <Button href={site.whatsapp} class="justify-center sm:flex-1">{heroContent.primaryCta}</Button>
+            <Button href={site.phoneHref} variant="ghost" class="justify-center sm:flex-1">{heroContent.secondaryCta}</Button>
+          </div>
+
+          <div class="overflow-hidden rounded-[calc(var(--radius-card)+0.25rem)] border border-[var(--color-border)] bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.16),transparent_40%),linear-gradient(180deg,rgba(17,21,19,1),rgba(10,12,11,1))]">
+            <div class="relative aspect-[16/10] p-6">
+              <div class="absolute inset-0 hex-pattern opacity-55"></div>
+              <div class="relative flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-[rgba(255,255,255,0.08)] bg-[rgba(10,12,11,0.45)] p-5">
+                <div>
+                  <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
+                    {sectionContent.contact.mapTitle}
+                  </p>
+                  <p class="mt-3 text-body text-[var(--color-text)]">
+                    {site.address.street}<br />
+                    {site.address.zip} {site.address.city}
+                  </p>
+                </div>
+                <p class="max-w-xs text-sm leading-7 text-[var(--color-text-muted)]">{sectionContent.contact.mapNotice}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

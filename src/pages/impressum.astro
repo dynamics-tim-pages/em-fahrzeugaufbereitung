@@ -1,0 +1,22 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { site, uiText } from '@/data/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const page = uiText.legalPages.impressum;
+---
+
+<BaseLayout title={`${page.title} · ${site.name}`} description={page.body} canonical="https://www.em-fahrzeugaufbereitung.de/impressum">
+  <main id="main-content" class="mx-auto min-h-screen max-w-[var(--container-max)] px-[var(--gutter)] pb-20 pt-32">
+    <div class="max-w-3xl space-y-8">
+      <Button href="/" variant="ghost">{uiText.legalPages.backHome}</Button>
+      <div class="space-y-4">
+        <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">{uiText.legalPages.eyebrow}</p>
+        <h1 class="font-[family-name:var(--font-display)] text-[clamp(3rem,9vw,5rem)] uppercase leading-none tracking-tight text-[var(--color-text)]">
+          {page.title}
+        </h1>
+        <p class="max-w-2xl text-body-lg text-[var(--color-text-muted)]">{page.body}</p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

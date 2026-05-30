@@ -1,0 +1,32 @@
+---
+import Button from '@/components/ui/Button.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import YouTubeEmbed from '@/components/ui/YouTubeEmbed.astro';
+import { sectionContent } from '@/data/site';
+import { youtube } from '@/data/videos';
+import { getHomepageVideos } from '@/lib/youtube';
+
+const videos = await getHomepageVideos();
+---
+
+<section id="videos" class="scroll-mt-28 py-[var(--space-section)]" aria-labelledby="videos-title">
+  <div class="mx-auto max-w-[var(--container-max)] space-y-12 px-[var(--gutter)]">
+    <SectionHeading id="videos-title" eyebrow={sectionContent.videos.eyebrow} title={sectionContent.videos.title}>
+      <p class="mt-6 max-w-2xl text-body text-[var(--color-text-muted)]">{sectionContent.videos.intro}</p>
+    </SectionHeading>
+
+    <div class="grid gap-[var(--grid-gap)] sm:grid-cols-2 xl:grid-cols-3">
+      {videos.map((video) => (
+        <article class="reveal space-y-4">
+          <YouTubeEmbed id={video.id} title={video.title} orientation={video.orientation} />
+        </article>
+      ))}
+    </div>
+
+    <div class="flex justify-start">
+      <Button href={youtube.channelUrl} variant="link" target="_blank">
+        {sectionContent.videos.cta}
+      </Button>
+    </div>
+  </div>
+</section>
