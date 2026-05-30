@@ -12,4 +12,11 @@
 
 ## Learnings
 
-(No learnings yet — first session.)
+- Tailwind CSS v4 theme tokens for this project should stay in `src/styles/global.css` via `@theme inline`, so teammates can mix raw CSS variables (`var(--color-green)`) with utility classes like `bg-bg`, `text-h2`, `rounded-card`, and `max-w-site`.
+- The hero signature pattern is most maintainable as a lightweight repeating SVG background with a radial top-center mask and a few brighter hotspots, which keeps the hex grid crisp without needing extra assets.
+- Motion utilities should default to tasteful fade/reveal behavior, but reduced-motion mode must immediately reveal content and remove transforms so the page never feels broken for motion-sensitive users.
+
+## Session: 2026-05-30T1535 Landing Page Build
+**Status:** ✓ Complete  
+Design system (global.css with tokens, @theme, animations, accessibility) built and handed off to McManus. Styling foundation is stable and ready for section integration.
+
