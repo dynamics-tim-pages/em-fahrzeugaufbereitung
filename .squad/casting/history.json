@@ -1,4 +1,17 @@
 {
-  "universe_usage_history": [],
-  "assignment_cast_snapshots": {}
+  "universe_usage_history": [
+    {
+      "universe": "The Usual Suspects",
+      "project": "em-fahrzeugaufbereitung",
+      "assigned_at": "2026-05-30T15:08:22Z"
+    }
+  ],
+  "assignment_cast_snapshots": {
+    "em-fahrzeugaufbereitung-2026-05-30": {
+      "assignment_id": "em-fahrzeugaufbereitung-2026-05-30",
+      "universe": "The Usual Suspects",
+      "agents": ["keaton", "mcmanus", "fenster", "hockney"],
+      "created_at": "2026-05-30T15:08:22Z"
+    }
+  }
 }

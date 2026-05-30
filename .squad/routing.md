@@ -6,12 +6,12 @@ How to decide who handles what.
 
 | Work Type | Route To | Examples |
 |-----------|----------|----------|
-| {domain 1} | {Name} | {example tasks} |
-| {domain 2} | {Name} | {example tasks} |
-| {domain 3} | {Name} | {example tasks} |
-| Code review | {Name} | Review PRs, check quality, suggest improvements |
-| Testing | {Name} | Write tests, find edge cases, verify fixes |
-| Scope & priorities | {Name} | What to build next, trade-offs, decisions |
+| Architecture & structure | Keaton | Component boundaries, project setup, build config, data flow |
+| Component implementation | McManus | Build Astro components, page assembly, data wiring, HTML, SEO |
+| Styling & visual | Fenster | Tailwind, CSS tokens, animations, hex patterns, fonts, dark theme |
+| Testing & QA | Hockney | Lighthouse, a11y audit, responsive check, acceptance criteria |
+| Code review | Keaton | Review PRs, check quality, enforce architecture |
+| Scope & priorities | Keaton | What to build next, trade-offs, decisions |
 | Session logging | Scribe | Automatic — never needs routing |
 
 ## Issue Routing
