@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://www.em-fahrzeugaufbereitung.de',
+  site: 'https://dynamics-tim-pages.github.io',
+  base: '/em-fahrzeugaufbereitung',
   vite: {
     plugins: [tailwindcss()],
   },
