@@ -19,6 +19,7 @@
 - tecktim prefers premium modal composition over generic app-card patterns on mobile, so lime stays restrained to the “after” state and close CTA while the rest of the surface stays dark and unified.
 - Dialog polish on this project should keep explicit `aria-labelledby` / `aria-describedby` hooks when title and caption move deeper into the visual stage, so styling upgrades do not cost accessibility.
 - Per-item entry labels (e.g., `Showroom-Finish`, `Reflex-Detail`) from trigger data preserve layout while elevating editorial character; maintains resilience with `galleryLabels.entry` fallback.
+- Centering the lightbox reliably in `src/components/ui/Lightbox.astro` means treating `<dialog>` as the full-viewport overlay shell with safe-area-aware padding variables, while the inner editorial surface owns the capped scrolling area via viewport-based `max-height`.
 
 ## Session: 2026-05-30T1535 Landing Page Build
 **Status:** ✓ Complete  

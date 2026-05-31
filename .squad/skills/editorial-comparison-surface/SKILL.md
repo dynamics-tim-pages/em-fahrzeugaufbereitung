@@ -16,6 +16,7 @@ Use this pattern when a comparison modal or lightbox needs to feel native to the
 - Build one comparison stage with an internal divider so before/after content feels editorial, not app-like.
 - Place title and caption inside the stage hierarchy; reserve the secondary area for compact meta only.
 - Keep lime accent limited to the “after” marker and the close/return CTA.
+- Let the `<dialog>` behave as a full-viewport centering shell with safe-area-aware padding, then cap the inner surface with viewport-based `max-height` so the modal stays visually centered without losing scroll access on shorter screens.
 - Preserve accessibility with `aria-labelledby` and `aria-describedby` on the dialog when content moves visually.
 
 ## Examples

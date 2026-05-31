@@ -20,6 +20,9 @@ Reduce the lightbox's internal separation by removing the extra meta divider, dr
 ### McManus — Result Title Service-Led Framing (2026-05-30)
 No reliable vehicle models are documented in the existing content for the three current gallery entries. Result titles, metadata, and lightbox descriptions are deliberately service-based instead of inventing vehicle names. Frame results around core service offerings: Außenaufbereitung (exterior detailing), Innenraumaufbereitung (interior detailing), Keramik-Versiegelung (ceramic coating). This delivers premium and concrete results while remaining honest to current data.
 
+### Fenster — Lightbox Viewport Centering (2026-05-31)
+The gallery lightbox should own its positioning at the `<dialog>` layer with a fixed full-viewport flex shell, explicit safe-area padding variables, and a viewport-capped inner surface. Default browser dialog placement left the modal reading too high in the viewport. Explicit overlay centering keeps the lightbox horizontally and vertically centered on mobile and desktop while preserving premium spacing, close-button reachability, and internal overflow for taller content.
+
 ## Governance
 
 - All meaningful changes require team consensus
