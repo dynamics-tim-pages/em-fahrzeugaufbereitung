@@ -11,6 +11,13 @@ export const site = {
     { day: 'Samstag', time: '09:30 – 14:00 Uhr' },
     { day: 'Termine', time: 'nach Vereinbarung' },
   ],
+  map: {
+    lat: 48.0633341,
+    lng: 9.4306166,
+    zoom: 17,
+    shareLink: 'https://maps.app.goo.gl/81u1kzvX6RqsqCfj7',
+    embedUrl: 'https://maps.google.com/maps?q=48.0633341,9.4306166&z=17&output=embed',
+  },
   social: {
     facebook: 'https://www.facebook.com/EMfahrzeugaufbereitung',
     instagram: 'https://www.instagram.com/em__fahrzeugaufbereitung/',
@@ -82,7 +89,7 @@ export const sectionContent = {
     infoTitle: 'So erreichst du uns',
     actionTitle: 'Schnell zum Termin',
     mapTitle: 'Karte & Anfahrt',
-    mapNotice: 'Maps-Embed folgt als 2-Klick-Lösung',
+    mapNotice: 'Wir befinden uns im Gewerbegebiet Herbertingen – Parkplätze direkt vor Ort.',
   },
 } as const;
 
@@ -116,6 +123,19 @@ export const uiText = {
     cancelLabel: 'Abbrechen',
     privacyNotice:
       'Mit Klick wird ein Video von YouTube geladen – es gelten die Datenschutzbestimmungen von Google.',
+  },
+  maps: {
+    loadLabel: 'Wird geladen',
+    loadingHint: 'Karte wird eingebettet …',
+    badge: 'Standort',
+    privacyBadge: '2-Klick-Embed',
+    openLabel: 'Karte laden',
+    consentTitle: 'Datenschutz-Hinweis',
+    confirmLabel: 'Karte jetzt laden',
+    cancelLabel: 'Abbrechen',
+    externalLabel: 'In Google Maps öffnen',
+    privacyNotice:
+      'Mit Klick wird Google Maps eingebettet – es gelten die Datenschutzbestimmungen von Google. Keine Daten werden ohne deine Zustimmung übertragen.',
   },
   footer: {
     claim: 'Studio-Look, saubere Details und schnelle Kontaktwege für Fahrzeuge aller Art.',

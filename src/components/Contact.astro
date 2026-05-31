@@ -1,5 +1,6 @@
 ---
 import Button from '@/components/ui/Button.astro';
+import GoogleMapsEmbed from '@/components/ui/GoogleMapsEmbed.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { heroContent, sectionContent, site, uiText } from '@/data/site';
 ---
@@ -89,23 +90,7 @@ import { heroContent, sectionContent, site, uiText } from '@/data/site';
             <Button href={site.phoneHref} variant="ghost" class="justify-center sm:flex-1">{heroContent.secondaryCta}</Button>
           </div>
 
-          <div class="overflow-hidden rounded-[calc(var(--radius-card)+0.25rem)] border border-[var(--color-border)] bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.16),transparent_40%),linear-gradient(180deg,rgba(17,21,19,1),rgba(10,12,11,1))]">
-            <div class="relative aspect-[16/10] p-6">
-              <div class="absolute inset-0 hex-pattern opacity-55"></div>
-              <div class="relative flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-[rgba(255,255,255,0.08)] bg-[rgba(10,12,11,0.45)] p-5">
-                <div>
-                  <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
-                    {sectionContent.contact.mapTitle}
-                  </p>
-                  <p class="mt-3 text-body text-[var(--color-text)]">
-                    {site.address.street}<br />
-                    {site.address.zip} {site.address.city}
-                  </p>
-                </div>
-                <p class="max-w-xs text-sm leading-7 text-[var(--color-text-muted)]">{sectionContent.contact.mapNotice}</p>
-              </div>
-            </div>
-          </div>
+          <GoogleMapsEmbed />
         </div>
       </article>
     </div>
