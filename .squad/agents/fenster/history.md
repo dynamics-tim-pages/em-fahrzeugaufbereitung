@@ -29,3 +29,8 @@ Design system (global.css with tokens, @theme, animations, accessibility) built 
 **Agents:** Fenster, McManus, Keaton, Hockney  
 **Status:** ✓ Complete
 Redesigned `src/components/ui/Lightbox.astro` as premium editorial surface with split comparison stage (not stacked modal cards). Fenster established unified composition; McManus softened divider density; Keaton added item-driven per-item labels (`Showroom-Finish`, `Reflex-Detail`); Hockney approved final UX with accessibility validation. All decisions merged to `.squad/decisions.md`.
+
+## Session: 2026-05-31T1357 Lightbox Viewport Centering
+**Status:** ✓ Complete  
+Implemented explicit viewport centering for `src/components/ui/Lightbox.astro` by treating `<dialog>` as full-viewport overlay shell with safe-area-aware padding variables and viewport-capped inner editorial surface. Modal now reads as centered horizontally and vertically on mobile and desktop while preserving close-button reachability and internal overflow for taller content. Decision merged to `.squad/decisions.md` (Fenster — Lightbox Viewport Centering).
+
