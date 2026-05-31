@@ -99,6 +99,50 @@ Hockney rejects if:
 - Lighthouse <95 in any category
 - Copy hardcoded instead of from site.ts
 
+## Map Embed Implementation (2026-05-31)
+
+**Authors:** McManus, Keaton, Hockney  
+**Status:** Conditional Approval (Minor fixes required)
+
+Built a dedicated `src/components/ui/GoogleMapsEmbed.astro` UI component for DSGVO-conscious map display, mirroring the existing `YouTubeEmbed.astro` state machine (`idle → consent → loading → ready`).
+
+### Architecture
+
+- **Privacy-First:** No Google Maps network request before explicit user consent
+- **Static Placeholder:** Hex-pattern branded placeholder, no preview API calls
+- **Embed URL:** Coordinate-based format (`https://maps.google.com/maps?q=48.0633341,9.4306166&z=17&output=embed`) — stable, key-free
+- **Data Source:** `src/data/site.ts` gains `site.map` object (lat, lng, zoom, shareLink, embedUrl) plus `uiText.maps.*` for all copy
+- **State Machine:** Idle → Consent (role="alertdialog") → Loading → Ready with ARIA updates, keyboard Escape support, prefers-reduced-motion handling
+- **Security:** iframe sandbox attribute (`allow-popups allow-scripts allow-same-origin`) + defense-in-depth isolation
+- **Fallback:** External share link always available for non-consenting users
+
+### QA Status (Hockney)
+
+**Verdict:** CONDITIONAL APPROVAL ✅  
+**9/10 acceptance criteria met.** One minor security hardening required:
+
+- ⚠️ Missing `iframe.sandbox` attribute in injected iframe (defense-in-depth)
+- ⚠️ Consent panel missing explicit `role="alertdialog"` and `aria-label="Datenschutz-Hinweis"`
+- ⚠️ Dead CSS line (`aria-hidden: false;` is not a CSS property) must be removed
+
+### Code Review Status (Keaton)
+
+**Verdict:** REJECT — three issues require resolution before ship:
+
+1. **Dead CSS `aria-hidden: false`** (line 176) — Remove; JS correctly manages via setAttribute
+2. **Missing `role="alertdialog"`** on consent panel — Add to `[data-maps-consent]` container
+3. **Missing `sandbox` attribute** on injected iframe — Add per guardrail #3
+
+### Ship Decision (Keaton)
+
+Ship the contact-section Google Maps embed only when the privacy gate and iframe hardening are intact. Approval depends on three things holding together: branded server-rendered placeholder, explicit consent before any Google request, and a hardened injected iframe.
+
+### Pattern Established
+
+The map embed successfully extends the YouTube 2-click pattern without deviation. This pattern is now the canonical template for all future external embeds (social, analytics, etc.).
+
+---
+
 ## Governance
 
 - All meaningful changes require team consensus
