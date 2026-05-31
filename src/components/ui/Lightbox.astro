@@ -8,7 +8,7 @@ import { sectionContent } from '@/data/site';
   aria-labelledby="gallery-lightbox-title"
   aria-describedby="gallery-lightbox-caption"
   style="--lightbox-pad-top:max(0.75rem,env(safe-area-inset-top));--lightbox-pad-right:max(0.75rem,env(safe-area-inset-right));--lightbox-pad-bottom:max(0.75rem,env(safe-area-inset-bottom));--lightbox-pad-left:max(0.75rem,env(safe-area-inset-left));padding:var(--lightbox-pad-top) var(--lightbox-pad-right) var(--lightbox-pad-bottom) var(--lightbox-pad-left);"
-  class="fixed inset-0 m-0 flex h-dvh w-full max-h-none max-w-none items-center justify-center overflow-y-auto overflow-x-hidden border-0 bg-transparent p-0 text-[var(--color-text)] shadow-none backdrop:bg-[rgba(4,6,5,0.88)] backdrop:backdrop-blur-md"
+  class="fixed inset-0 m-0 h-dvh w-full max-h-none max-w-none items-center justify-center overflow-y-auto overflow-x-hidden border-0 bg-transparent p-0 text-[var(--color-text)] shadow-none backdrop:bg-[rgba(4,6,5,0.88)] backdrop:backdrop-blur-md"
 >
   <div class="relative w-[min(100%,74rem)] max-h-[calc(100dvh-var(--lightbox-pad-top)-var(--lightbox-pad-bottom))] overflow-y-auto rounded-[calc(var(--radius-card)+0.75rem)] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(17,21,19,0.98),rgba(10,12,11,1))] shadow-[0_36px_100px_-24px_rgba(0,0,0,0.84)]">
     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_30%,rgba(0,0,0,0.16))]"></div>
@@ -99,6 +99,12 @@ import { sectionContent } from '@/data/site';
     </div>
   </div>
 </dialog>
+
+<style>
+  dialog[data-gallery-lightbox][open] {
+    display: flex;
+  }
+</style>
 
 <script is:inline>
   (() => {
