@@ -1,82 +1,48 @@
 <!-- managed-by: preflight -->
-# EM Fahrzeugaufbereitung Copilot Instructions
+# EM Fahrzeugaufbereitung Copilot Guide
 
 ## Project Overview
-EM Fahrzeugaufbereitung is a single-project Astro 6.2.2 site deployed to GitHub Pages. It uses npm, strict TypeScript, Tailwind v4 via `@tailwindcss/vite`, and shared design tokens in `src/styles/global.css`. Prefer server-first Astro, static rendering, semantic HTML, and small progressive-enhancement scripts over hydrated islands.
+This repo is a static Astro 6 landing page for EM Fahrzeugaufbereitung. `landingpage-spec.md` is the authoritative product brief: keep its zone order, CTA behavior, privacy requirements, and SEO requirements aligned before inventing new UI or content.
 
 ## Build & Run Commands
-- Install dependencies with `npm install`.
-- Start local development with `npm run dev` or `npm run start`.
-- Build production output with `npm run build`.
-- Preview the built site with `npm run preview`.
-- GitHub Pages deployment lives in `.github/workflows/deploy.yml` and expects `npm ci` plus `npm run build`.
-
-## Code Style
-- Always import modules under `src` with the `@/` alias from `tsconfig.json`; do not introduce `../` imports inside `src`.
-- Match repo formatting: no semicolons, single quotes, 2-space indentation, and trailing commas in multiline structures.
-- Keep `.astro` layouts and components in PascalCase.
-- Keep `src/data/*.ts` and `src/lib/*.ts` modules lowercase and single-purpose where practical.
-- Do not add barrel exports.
-- Prefer `as const`, `satisfies`, and explicit types over broad type assertions.
+- `npm install`
+- `npm run dev`
+- `npm run build`
+- `npm run preview`
 
 ## Architecture
-- `src/pages/` owns routes and route-local composition.
-- `src/layouts/` owns shared page chrome and metadata flow.
-- `src/components/` holds domain sections; `src/components/ui/` holds reusable primitives.
-- `src/data/` centralizes copy, legal/contact/site metadata, gallery items, and video configuration.
-- `src/lib/` holds typed transforms and fetch helpers such as YouTube and sitemap support.
-- `src/styles/global.css` is the source of shared tokens, theme bridges, and global styling decisions.
-- `public/` is for static assets copied as-is at build time.
+- `src/pages/index.astro` assembles the homepage from `Header`, `Hero`, `Services`, `Gallery`, `Videos`, `Contact`, and `Footer`.
+- Keep landing-page zones in `src/components/` and shared primitives in `src/components/ui/`.
+- Keep customer-facing content in `src/data/site.ts`, `src/data/services.ts`, `src/data/gallery.ts`, and `src/data/videos.ts`.
+- `src/lib/youtube.ts` is a build-time utility for RSS fetching and local thumbnail caching; do not move that logic into browser code.
+- `src/layouts/BaseLayout.astro` owns metadata, canonical URLs, fonts, and JSON-LD. Legal pages live in `src/pages/`.
 
-## Astro Conventions
-- Keep Astro server-first. Compute data in frontmatter from `@/data/*` or typed helpers and render HTML statically when possible.
-- No `client:*` islands are currently used. Treat that as the default and add hydration only when inline enhancement cannot satisfy the interaction.
-- Preserve SEO metadata, canonical URLs, structured data, and sitemap inputs across route or site-identity changes.
-- Keep inline scripts small, accessibility-aware, and scoped to the component that needs them.
-- Review `set:html`, inline SVG strings, and other raw HTML injection carefully before changing them.
+## Code Style
+- Prefer server-rendered Astro components and hydrate only the interactive pieces that truly need client behavior.
+- Reuse `Button`, `SectionHeading`, `ServiceCard`, `Lightbox`, and `YouTubeEmbed` before adding new primitives.
+- Preserve the premium dark visual system from `src/styles/global.css`: token-driven colors, restrained green accents, subtle hex patterning, rounded cards, and reduced-motion-safe transitions.
+- Keep text, labels, badges, CTA copy, and legal/privacy messaging data-driven instead of hard-coding them inside components.
 
-## Squad Conventions
-- Respect `.github/agents/squad.agent.md`, `.squad/routing.md`, and `.squad/decisions.md` when work intersects the existing Squad workflow.
-- Do not create a parallel orchestration system; if a repo-wide convention changes, record it in Squad decisions.
-- For Squad-driven issue work, follow the `squad/{issue-number}-{kebab-case-slug}` branch naming convention described in `.squad/routing.md`.
-
-## Testing & Validation
-- No test framework or lint configuration is currently committed. Do not invent Jest, Vitest, Playwright, ESLint, Prettier, or Biome requirements.
-- Validate changes with `npm run build` and focused manual checks of affected pages, interactions, and metadata.
+## Testing & QA
+- No automated test framework is configured yet. Validate changes with `npm run build` and by manually checking anchor navigation, legal pages, CTA targets, lightbox behavior, and the YouTube consent flow.
+- Maintain one `h1` on the homepage and preserve the section ids `leistungen`, `galerie`, `videos`, and `kontakt`.
+- Keep sitemap, canonical metadata, and JSON-LD working when changing routes, layout code, or site metadata.
 
 ## Common Pitfalls
-- Do not hardcode shared marketing copy or site metadata in components when it belongs in `src/data/*.ts`.
-- Keep `astro.config.mjs`, `src/data/site.ts`, and `src/pages/sitemap.xml.ts` aligned when changing URLs, base paths, or deployment assumptions.
-- Preserve keyboard support, focus visibility, reduced-motion behavior, and consent/privacy gates for dialogs, galleries, and video embeds.
-- Prefer the existing token system in `src/styles/global.css` over one-off colors, spacing, radius, or shadow values.
-- Avoid adding large client-side frameworks or hydrated islands for interactions already handled by small scripts.
+- Do not reorder or drop spec-defined zones without updating `landingpage-spec.md`.
+- The YouTube zone must stay consent-gated: no iframe, Google request, or autoplay before explicit user activation.
+- Always show pinned highlight Shorts first and append feed Shorts only after filtering out pinned ids.
+- Use local assets or cached thumbnails for hero, gallery, and video previews; avoid runtime hotlinking.
+- `siteMeta.baseUrl` is the authoritative public domain for metadata and sitemap output. If deployment URLs change, update it intentionally and keep `astro.config.mjs` aligned.
+- When writing absolute asset or fallback paths, respect `import.meta.env.BASE_URL` because the repo deploys under a GitHub Pages base path.
 
 ## Maintenance
-- This configuration was generated by preflight for the current Astro, Tailwind, and TypeScript stack.
-- Re-run `@preflight` when the project adds a test stack, lint tooling, a UI framework, new file-type-specific conventions, or major architectural shifts.
-- Keep `.github/preflight-boundaries.yaml` and `.github/.preflight-state.json` committed so the team shares the same Copilot behavior.
+This configuration was generated by preflight. Re-run `@preflight` after adding a test stack, introducing new routes, changing deployment URL strategy, or reorganizing the Astro component tree.
 
 ## Interaction Guidelines
-When working on this project, prefer asking over assuming:
-
-- Before making architectural changes such as adding hydration, a new dependency, or a different content/data location, ask which approach the team prefers.
-- Before inferring conventions not listed here, read the relevant files first or ask for clarification.
-- When multiple valid approaches exist, present options with tradeoffs instead of silently choosing one.
-- When task scope is ambiguous, confirm whether the change is route-local, data-wide, or a broader design-system change.
-- Use structured questions when available, and do not re-ask a preference already established in the current session.
-
-## lean-ctx Tool Preference
-lean-ctx MCP is configured for this project. When lean-ctx tools are available, prefer them over native equivalents to reduce token usage and repeated-read cost:
-
-| Instead of | Use | Benefit |
-|---|---|---|
-| `view` / `read` | `ctx_read` | Cached file reads |
-| `glob` / directory listing | `ctx_tree` | Compressed directory maps |
-| `rg` / search | `ctx_search` | Filtered, deduplicated matches |
-| shell inspection | `ctx_shell` | Compressed CLI output |
-
-If lean-ctx tools are unavailable, fall back to standard tools transparently.
-
-## Agent Guardrails
-This project uses preflight guardrails. Tool calls are filtered by `.github/preflight-boundaries.yaml`. If a command is blocked, suggest a safe alternative and do not retry the blocked command; ask the user to run `@preflight tune-boundaries` if the policy needs to change.
+- Ask before inventing new customer-facing copy, pricing, offers, testimonials, legal text, or contact details.
+- Ask before changing the zone order, CTA destinations, or spec-defined behaviors such as the 2-click YouTube consent flow.
+- Ask before adding new dependencies, hydration islands, or client-side state when a static Astro approach would work.
+- Ask before changing SEO, structured data, or deployment URL behavior.
+- Read the relevant zone component and matching data module before editing; do not assume how a section works without checking the current implementation.
 <!-- end-managed-by: preflight -->

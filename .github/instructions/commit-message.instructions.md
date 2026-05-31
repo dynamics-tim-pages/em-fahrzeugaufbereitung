@@ -1,11 +1,14 @@
 <!-- managed-by: preflight -->
-# Commit message instructions
+# Commit message format
 
-Use Conventional Commits:
+Use this format for every generated commit message:
 
 `<type>(<scope>): <description>`
 
-`scope` is optional. Keep the subject imperative, lowercase, specific to the staged change, and under 72 characters.
+- Write the subject in lowercase imperative mood.
+- Keep the subject line at or under 72 characters.
+- Do not end the subject with a period.
+- Use `!` after the type or scope for breaking changes and add a `BREAKING CHANGE:` footer.
 
 ## Types
 
@@ -14,39 +17,43 @@ Use Conventional Commits:
 | `feat` | New feature |
 | `fix` | Bug fix |
 | `docs` | Documentation only |
-| `style` | Formatting or styling-only cleanup with no logic change |
+| `style` | Formatting, spacing, or visual-only changes |
 | `refactor` | Code restructuring without behavior change |
 | `test` | Adding or updating tests |
-| `chore` | Tooling, housekeeping, or maintenance |
+| `chore` | Tooling, dependencies, or maintenance |
 | `perf` | Performance improvements |
 | `ci` | CI/CD configuration changes |
-| `build` | Build system or dependency changes |
+| `build` | Build system or deployment changes |
 
 ## Scopes
 
-- Prefer scopes drawn from this repo: `pages`, `layouts`, `components`, `ui`, `data`, `lib`, `styles`, `seo`, `config`, `ci`, `deps`, `assets`
-- Use `config` for Astro, TypeScript, Copilot, editor, or preflight changes.
-- Use `seo` for metadata, canonical URLs, JSON-LD, sitemap, robots, or social card changes.
-- Use `deps` for `package.json` or `package-lock.json` updates.
-- Omit the scope if the change spans multiple areas equally.
+Use the narrowest scope that matches the change. Common scopes in this repo:
 
-## Rules
+- `hero`, `header`, `services`, `gallery`, `videos`, `contact`, `footer`
+- `data`, `layouts`, `pages`, `styles`, `seo`, `legal`
+- `copilot`, `deps`, `build`
 
-- Use imperative mood.
-- Keep the subject lowercase with no trailing period.
-- Capture the most important staged change only; do not mention unrelated follow-up work.
-- Add a short body only when extra context is necessary.
-- Mark breaking changes with `!` after the type or scope and add a `BREAKING CHANGE:` footer.
+Scopes are optional, but prefer them when the change is confined to one zone or one concern.
 
 ## Examples
 
-- `feat(pages): add paint correction hero section`
-- `fix(data): correct contact and legal metadata`
-- `refactor(ui): simplify youtube consent overlay markup`
-- `ci: update github pages deploy workflow`
-- `chore(config): add preflight copilot instructions`
+- `feat(videos): add consent-gated shorts feed section`
+- `fix(header): point sticky cta to whatsapp`
+- `chore(copilot): add astro and styles instructions`
 
-`feat(config)!: move site to root deploy path`
+Example with body:
 
-`BREAKING CHANGE: pages now resolve without the repository base path.`
+```text
+feat(gallery): expand placeholder showcase cards
+
+Keep six local-ready gallery placeholders so the homepage matches the landing page spec.
+```
+
+Example with breaking change:
+
+```text
+refactor(data)!: rename site metadata fields
+
+BREAKING CHANGE: update components that read siteMeta canonical properties.
+```
 <!-- end-managed-by: preflight -->

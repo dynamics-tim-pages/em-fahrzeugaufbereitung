@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "pluginVersion": "2.3.0",
-  "lastRun": "2026-05-31T18:19:03.9357550+02:00",
+  "lastRun": "2026-05-31T16:19:26.000+02:00",
   "confirmedStack": {
     "languages": [
       "astro",
@@ -22,39 +22,26 @@
       "src/",
       "src/components/",
       "src/components/ui/",
-      "src/layouts/",
       "src/data/",
-      "src/lib/",
+      "src/layouts/",
       "src/pages/",
       "src/styles/",
-      "public/"
+      "public/images/"
     ],
+    "corrections": "landingpage-spec.md is authoritative. Keep the landing page static-first, keep the YouTube flow consent-gated, and keep video zones as pinned highlights plus filtered feed shorts.",
     "confirmedPatterns": [
-      "Use the @/ alias for imports under src",
-      "PascalCase .astro component and layout files",
-      "lowercase single-purpose modules in src/data and src/lib",
-      "no semicolons",
-      "single quotes",
-      "2-space indentation",
-      "centralized content and metadata in src/data",
-      "server-first Astro with small inline enhancement scripts",
-      "no client:* islands detected"
+      "zone components live in src/components and are composed from src/pages/index.astro",
+      "shared primitives live in src/components/ui",
+      "customer-facing content and section metadata live in src/data/*.ts",
+      "global design tokens and motion helpers live in src/styles/global.css",
+      "interactive behavior uses small inline scripts inside Astro components instead of a client framework"
     ]
   },
   "hubFeatures": {
-    "configFreshness": true,
+    "configFreshness": false,
     "sessionLogger": false,
-    "guardrails": true,
-    "versionCheck": true
-  },
-  "boundaries": {
-    "preset": "balanced",
-    "mode": "warn",
-    "stackDefaultsEnabled": true,
-    "appliedStackProfiles": [
-      "git",
-      "nodejs"
-    ]
+    "guardrails": false,
+    "versionCheck": false
   },
   "managedFiles": [
     ".github/copilot-instructions.md",
@@ -62,11 +49,7 @@
     ".github/instructions/typescript.instructions.md",
     ".github/instructions/styles.instructions.md",
     ".github/instructions/commit-message.instructions.md",
-    ".github/agents/code-reviewer.agent.md",
-    ".github/extensions/preflight-hub/extension.mjs",
-    ".github/preflight-boundaries.yaml",
-    ".github/.preflight-state.json",
-    ".vscode/settings.json"
-  ],
-  "reminderDaysThreshold": 30
+    ".vscode/settings.json",
+    ".github/.preflight-state.json"
+  ]
 }

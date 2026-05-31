@@ -2,14 +2,20 @@
 applyTo: "src/**/*.ts"
 ---
 <!-- managed-by: preflight -->
-# TypeScript instructions
+# TypeScript conventions
 
-- This repo uses strict TypeScript. Keep exports fully typed and prefer `as const`, `satisfies`, explicit object shapes, and narrow unions over `any`.
-- Always use the `@/` alias for modules under `src`; never add relative imports inside `src`.
-- Keep shared content and site configuration in `src/data/*.ts` and transforms or external helpers in `src/lib/*.ts`.
-- Match repo style: no semicolons, single quotes, 2-space indentation, and trailing commas for multiline literals.
-- Use lowercase single-word filenames in `src/data` and `src/lib` when creating new modules.
-- Give exported transforms clear input and output types, especially for sitemap entries, gallery/video data, and external fetch results.
-- Sanitize or validate external or HTML-adjacent data before turning it into typed output consumed by Astro templates.
-- Do not add barrel exports.
+- Keep `src/data/*.ts` as typed, serializable content/config modules. Use `as const`, `satisfies`, and exported types to keep component props narrow.
+- Keep `src/lib/*.ts` for build-time utilities only. Node APIs, RSS fetching, and thumbnail caching belong there, not in browser code.
+- When changing the YouTube pipeline, preserve the contract: pinned highlights stay first, feed items exclude pinned ids, failures degrade gracefully, and local thumbnail paths remain valid under `import.meta.env.BASE_URL`.
+- Non-critical build-time network features should warn and fall back safely instead of crashing the entire build.
+- Avoid duplicating contact data, URLs, labels, or CTA copy; reference `site.ts` and the relevant data module instead.
+- Keep helper functions small, explicit, and side-effect aware. If a function touches the filesystem or network, make that obvious in the name and placement.
+- Prefer real type guards and precise return types over `as any` or double-casting.
+- If a data shape changes, update both the source module and all consuming components in the same change.
+
+## Avoid
+
+- Browser globals inside build-time utilities.
+- Silent behavior changes in section data without updating the corresponding Astro zone.
+- Hard-coded deployment URLs when `siteMeta.baseUrl` or `import.meta.env.BASE_URL` should be used.
 <!-- end-managed-by: preflight -->

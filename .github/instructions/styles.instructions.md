@@ -1,13 +1,20 @@
 ---
-applyTo: "src/**/*.{astro,css}"
+applyTo: "src/styles/**/*.css"
 ---
 <!-- managed-by: preflight -->
-# Styles instructions
+# Styling conventions
 
-- Tailwind v4 runs through `@tailwindcss/vite`. Keep shared design tokens, theme bridges, and reusable utilities in `src/styles/global.css`.
-- Use existing CSS custom properties first, including the shared color, spacing, radius, and layout tokens already exposed there.
-- In `.astro` files, prefer Tailwind utilities and existing token-based values for local styling; move styles into CSS only when they are shared or truly global.
-- Preserve the current premium dark visual system: restrained lime accents, textured surfaces, glassy cards, and deliberate motion.
-- Respect `prefers-reduced-motion`, visible focus states, contrast, and keyboard/touch usability; do not rely on hover-only affordances.
-- Review inline SVG, `set:html`, data URI backgrounds, and any HTML/CSS injection carefully before changing them.
+- Keep design tokens in `:root` and `@theme inline` inside `src/styles/global.css`. Add new colors, spacing, or radii there before using them in component markup.
+- Preserve the current premium dark palette: dark surfaces, bright green accents, soft borders, glassy overlays, and controlled glow.
+- Reuse the existing motion language (`fade-up`, `reveal`, staggered transitions) and always respect `prefers-reduced-motion`.
+- Keep the hex motif, gradients, and highlights subtle. The green accent should signal action, not dominate every surface.
+- Prefer reusable utility classes and tokens over one-off hard-coded values scattered across multiple components.
+- Maintain accessible contrast and clear focus states for buttons, anchors, and interactive cards.
+- When styling hero, gallery, or video media, optimize for local assets, masked overlays, and readable text over imagery.
+
+## Avoid
+
+- Hard-coding new brand colors directly in component files.
+- Adding animation that loops aggressively or ignores reduced-motion preferences.
+- Solving layout problems with large negative margins or brittle absolute positioning when the token system can handle it.
 <!-- end-managed-by: preflight -->
