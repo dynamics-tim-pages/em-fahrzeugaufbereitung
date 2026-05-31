@@ -5,20 +5,8 @@ import { services } from '@/data/services';
 ---
 
 <section id="top" class="relative isolate overflow-hidden" aria-labelledby="hero-title">
-  <div class="absolute inset-0">
-    <img
-      src={heroContent.backgroundImage}
-      alt=""
-      aria-hidden="true"
-      width={1600}
-      height={1200}
-      loading="eager"
-      fetchpriority="high"
-      class="size-full object-cover object-center opacity-48"
-    />
-  </div>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.24),transparent_30%),linear-gradient(180deg,rgba(18,23,20,0.45),rgba(10,12,11,0.96)_62%,rgba(10,12,11,1))]"></div>
-  <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,12,11,0.12),rgba(10,12,11,0.88)_55%,rgba(10,12,11,1))]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.24),transparent_30%),linear-gradient(180deg,rgba(18,23,20,1),rgba(10,12,11,1))]"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,12,11,0.08),rgba(10,12,11,0.88)_55%,rgba(10,12,11,1))]"></div>
   <div class="hex-pattern"></div>
 
   <div class="relative mx-auto flex min-h-[92vh] max-w-[var(--container-max)] items-center px-[var(--gutter)] pb-16 pt-28 sm:pt-32 lg:pt-36">
@@ -99,17 +87,5 @@ import { services } from '@/data/services';
         </div>
       </aside>
     </div>
-  </div>
-
-  <div class="pointer-events-none absolute inset-x-0 bottom-6 z-[1] flex justify-center">
-    <a
-      href="#leistungen"
-      class="focus-ring pointer-events-auto inline-flex flex-col items-center gap-2 rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(10,12,11,0.6)] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-text-muted)] backdrop-blur-md transition hover:border-[rgba(116,224,74,0.32)] hover:text-[var(--color-text)]"
-    >
-      <span>{heroContent.scrollHint}</span>
-      <svg aria-hidden="true" viewBox="0 0 24 24" class="size-4 text-[var(--color-green)]" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-    </a>
   </div>
 </section>

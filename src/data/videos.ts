@@ -12,7 +12,7 @@ export const youtube = {
   rss: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCMbN1Y2CKra6PRwHVgYQTVQ',
   showFeed: true,
   feedCount: 3,
-  // Additional Shorts shown below the pinned highlights
+  // Fallback videos shown only when the RSS feed returns fewer than feedCount Shorts
   pinned: [
     { id: 'qWU6DMT0h9U', title: 'Highlight 1', orientation: 'portrait' },
     { id: 'asgzdpSS1HQ', title: 'Highlight 2', orientation: 'portrait' },

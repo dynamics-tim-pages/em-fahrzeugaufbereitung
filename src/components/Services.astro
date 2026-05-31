@@ -7,19 +7,16 @@ import { services } from '@/data/services';
 
 <section id="leistungen" class="scroll-mt-28 py-[var(--space-section)]" aria-labelledby="services-title">
   <div class="mx-auto max-w-[var(--container-max)] space-y-12 px-[var(--gutter)]">
-    <SectionHeading id="services-title" eyebrow={sectionContent.services.eyebrow} title={sectionContent.services.title} />
+    <SectionHeading id="services-title" eyebrow={sectionContent.services.eyebrow} title={sectionContent.services.title}>
+      <p class="mt-6 max-w-2xl text-body text-[var(--color-text-muted)]">{sectionContent.services.outro}</p>
+    </SectionHeading>
 
-    <div class="grid gap-[var(--grid-gap)] sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-[var(--grid-gap)] md:grid-cols-2 xl:grid-cols-3">
       {services.map((service, index) => (
-        <div
-          class="reveal"
-          style={`transition-delay: ${Math.min(index, 5) * 70}ms;`}
-        >
+        <div class:list={[index > 0 && 'stagger-1', index > 1 && 'stagger-2']}>
           <ServiceCard {...service} />
         </div>
       ))}
     </div>
-
-    <p class="text-center text-body text-[var(--color-text-muted)]">{sectionContent.services.outro}</p>
   </div>
 </section>

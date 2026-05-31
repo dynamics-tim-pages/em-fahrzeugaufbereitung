@@ -40,7 +40,7 @@ import Button from '@/components/ui/Button.astro';
       </nav>
 
       <div class="hidden lg:block">
-        <Button href={site.whatsapp}>{uiText.header.cta}</Button>
+        <Button href="#kontakt">{uiText.header.cta}</Button>
       </div>
 
       <button
@@ -88,7 +88,7 @@ import Button from '@/components/ui/Button.astro';
       </nav>
 
       <div class="mt-10">
-        <Button href={site.whatsapp} class="w-full justify-center">{uiText.header.cta}</Button>
+        <Button href="#kontakt" class="w-full justify-center">{uiText.header.cta}</Button>
       </div>
     </div>
   </div>
@@ -110,7 +110,7 @@ import Button from '@/components/ui/Button.astro';
     header.dataset.bound = 'true';
 
     const setScrolled = () => {
-      shell.dataset.scrolled = window.scrollY > 80 ? 'true' : 'false';
+      shell.dataset.scrolled = window.scrollY > 24 ? 'true' : 'false';
     };
 
     const setMenuState = (open) => {

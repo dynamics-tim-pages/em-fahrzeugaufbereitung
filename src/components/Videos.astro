@@ -6,7 +6,7 @@ import { sectionContent } from '@/data/site';
 import { youtube } from '@/data/videos';
 import { getHomepageVideos } from '@/lib/youtube';
 
-const { pinned, feed } = await getHomepageVideos();
+const videos = await getHomepageVideos();
 ---
 
 <section id="videos" class="scroll-mt-28 py-[var(--space-section)]" aria-labelledby="videos-title">
@@ -15,38 +15,12 @@ const { pinned, feed } = await getHomepageVideos();
       <p class="mt-6 max-w-2xl text-body text-[var(--color-text-muted)]">{sectionContent.videos.intro}</p>
     </SectionHeading>
 
-    <div class="space-y-10">
-      <div class="space-y-5">
-        <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
-          {sectionContent.videos.highlightsLabel}
-        </p>
-        <div class="grid gap-[var(--grid-gap)] sm:grid-cols-2 lg:grid-cols-3">
-          {pinned.map((video, index) => (
-            <article class="reveal space-y-4" style={`transition-delay: ${Math.min(index, 5) * 70}ms;`}>
-              <YouTubeEmbed id={video.id} title={video.title} orientation={video.orientation} />
-            </article>
-          ))}
-        </div>
-      </div>
-
-      {feed.length > 0 ? (
-        <div class="space-y-5">
-          <p class="text-eyebrow font-semibold uppercase tracking-[0.22em] text-[var(--color-green)]">
-            {sectionContent.videos.feedLabel}
-          </p>
-          <div class="grid gap-[var(--grid-gap)] sm:grid-cols-2 lg:grid-cols-3">
-            {feed.map((video, index) => (
-              <article class="reveal space-y-4" style={`transition-delay: ${Math.min(index + 3, 7) * 70}ms;`}>
-                <YouTubeEmbed id={video.id} title={video.title} orientation={video.orientation} />
-              </article>
-            ))}
-          </div>
-        </div>
-      ) : youtube.showFeed ? (
-        <p class="rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[rgba(255,255,255,0.03)] px-5 py-4 text-sm leading-7 text-[var(--color-text-muted)]">
-          {sectionContent.videos.feedFallback}
-        </p>
-      ) : null}
+    <div class="grid gap-[var(--grid-gap)] sm:grid-cols-2 xl:grid-cols-3">
+      {videos.map((video) => (
+        <article class="reveal space-y-4">
+          <YouTubeEmbed id={video.id} title={video.title} orientation={video.orientation} />
+        </article>
+      ))}
     </div>
 
     <div class="flex justify-start">
