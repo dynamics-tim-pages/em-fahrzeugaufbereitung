@@ -23,6 +23,82 @@ No reliable vehicle models are documented in the existing content for the three 
 ### Fenster — Lightbox Viewport Centering (2026-05-31)
 The gallery lightbox should own its positioning at the `<dialog>` layer with a fixed full-viewport flex shell, explicit safe-area padding variables, and a viewport-capped inner surface. Default browser dialog placement left the modal reading too high in the viewport. Explicit overlay centering keeps the lightbox horizontally and vertically centered on mobile and desktop while preserving premium spacing, close-button reachability, and internal overflow for taller content.
 
+## Google Maps Embed Decision (2026-05-31)
+
+**Author:** Keaton
+
+The Google Maps embed in the contact section uses a **2-click consent gate** — identical in spirit to the existing YouTube embed pattern. No Google iframe loads until the user explicitly opts in.
+
+### Rationale
+
+1. **DSGVO compliance** — Google Maps iframes transmit IP + cookies to Google. Eager-loading violates DSGVO without prior consent.
+2. **Consistency** — YouTubeEmbed already establishes this pattern. Users and developers expect the same privacy UX.
+3. **Performance** — No third-party iframe on initial load. Static placeholder with hex-pattern background keeps Lighthouse scores intact.
+
+### Architecture Shape
+
+- **New component:** `src/components/ui/GoogleMapsEmbed.astro`
+- **Pattern:** Static preview state → consent overlay → iframe injection (mirrors YouTubeEmbed)
+- **Data source:** `src/data/site.ts` gains a `map` object with embed URL, coordinates, and share link
+- **Integration point:** Replaces the current placeholder in `Contact.astro`
+
+### Constraints
+
+- Use `https://www.google.com/maps/embed?pb=...` (standard embed, no API key required)
+- Share link (`maps.app.goo.gl/...`) is for fallback, not iframe src
+- Full server-render in idle state (no JS until interaction)
+- `prefers-reduced-motion` must suppress transitions
+- Consent copy references Google privacy policy
+
+---
+
+## Map Embed QA Guardrails (2026-05-31)
+
+**Author:** Hockney  
+**Status:** Planning Phase (Pre-Implementation)
+
+### QA Principles
+
+This defines what Hockney needs to see before sign-off.
+
+1. **Privacy-First Consent Model (MANDATORY)** — 2-click pattern: Idle → Consent → Active. No external calls until user confirms.
+2. **No Google Maps Static API** — Use generic hex placeholder + address text. No preview snapshots from Google.
+3. **Iframe Sandboxing** — `sandbox="allow-popups allow-scripts allow-same-origin"` + `allow="geolocation"`
+4. **Keyboard Navigation** — Full WCAG AA support: Tab, Escape key, visible focus rings (≥3px, ≥2:1 contrast)
+5. **Responsive Container** — Aspect ratio maintained 320px → 1440px. No CLS on iframe injection.
+6. **Focus Management** — Confirm/Cancel buttons use `.focus-ring`. Post-cancel, focus returns to trigger.
+7. **ARIA & Semantics** — `data-map-*` state machine. Consent panel marked `role="alertdialog"`.
+8. **prefers-reduced-motion** — Transitions drop to 1ms or disabled entirely.
+9. **URL Parameters** — Embed URL uses proper Google Maps Embed API (not search result iframe).
+10. **CSS Variables Only** — No external font/CSS loads from wrapper (map iframe is unavoidable).
+11. **Loading State** — Optional: Show indicator if iframe takes >800ms.
+12. **Share Link Fallback** — Optional: "View on Google Maps" link in overlay.
+
+### Acceptance Criteria (Hockney's Checklist)
+
+- **AC-Map-001:** Map iframe does not load until user confirms. Network tab shows no external calls until consent.
+- **AC-Map-002:** Consent overlay displays, has readable text + 2 buttons, dismissible with Escape.
+- **AC-Map-003:** State machine transitions: idle → consent → loading → ready with correct visual/interactive states.
+- **AC-Map-004:** Keyboard accessibility: Tab, focus rings, Escape key, logical order.
+- **AC-Map-005:** Responsive layout: Maintains aspect ratio, no CLS, safe area padding on mobile.
+- **AC-Map-006:** ARIA updates (aria-busy, aria-label) signal state changes. Buttons have accessible names.
+- **AC-Map-007:** Under `prefers-reduced-motion: reduce`, transitions disabled (1ms), interactions still work.
+- **AC-Map-008:** No regressions: Address info, contact links, hours, grid, lightbox all unchanged.
+- **AC-Map-009:** Lighthouse ≥95 (all categories). FCP/LCP unaffected. CLS <0.1.
+- **AC-Map-010:** All copy (buttons, consent text) live in `src/data/site.ts` under `uiText.maps.*`.
+
+### No-Go Criteria
+
+Hockney rejects if:
+- Map iframe loads on page load (privacy)
+- No visible focus ring on consent buttons (WCAG AA)
+- Escape key doesn't dismiss consent (keyboard)
+- Contact section layout broken on mobile (regression)
+- CLS >0.1 (performance)
+- Static Google Maps API called without consent (DSGVO)
+- Lighthouse <95 in any category
+- Copy hardcoded instead of from site.ts
+
 ## Governance
 
 - All meaningful changes require team consensus

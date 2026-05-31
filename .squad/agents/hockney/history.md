@@ -12,6 +12,8 @@
 
 - Hockney's UX review role is critical for premium design validation: initial feedback on over-boxed divider density and generic entry label shapes iteration toward elevated editorial character.
 - Per-item premium labels like `Showroom-Finish` and `Reflex-Detail` successfully elevate lightbox reading from generic gallery component to exclusive editorial surface while maintaining existing layout.
+- YouTube 2-click embed pattern (Privacy gating + state machine + consent overlay + keyboard support) is the architectural foundation for ALL future external embeds (maps, social, etc.). Do not reinvent—extend or mirror this pattern.
+- Site coordinates are 48.0633341 N, 9.4306166 E (Herbertingen, EM Fahrzeugaufbereitung). Current placeholder copy in Contact.astro line 105 reads "Maps-Embed folgt als 2-Klick-Lösung".
 
 ## Session: 2026-05-30T1751 Lightbox UI Refresh (Review)
 **Agents:** Fenster, McManus, Keaton, Hockney  
@@ -23,3 +25,7 @@ Conducted UX review across three iterations: identified divider density and entr
 **Status:** ✓ Complete  
 Reviewed mcmanus result title refresh: service-led framing for Außenaufbereitung, Innenraumaufbereitung, Keramik-Versiegelung per core service offerings (no reliable vehicle models in current data). Approved titles as specific, premium, and placeholder-free. All gallery and lightbox labels wired per-item.
 
+
+
+## Map Embed Orchestration Session (2026-05-31)
+Squad orchestrated map embed decision. Keaton and Hockney defined architecture and QA guardrails respectively. Decision merged into decisions.md. Ready for McManus implementation phase.
