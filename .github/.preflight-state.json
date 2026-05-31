@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "pluginVersion": "2.3.0",
+  "lastRun": "2026-05-31T18:19:03.9357550+02:00",
+  "confirmedStack": {
+    "languages": [
+      "astro",
+      "typescript",
+      "css"
+    ],
+    "framework": {
+      "name": "astro",
+      "version": "6.2.2"
+    },
+    "packageManager": "npm",
+    "testFramework": null,
+    "cicd": "github-actions",
+    "linting": [],
+    "projectType": "single",
+    "targetWorkspaces": [],
+    "keyDirectories": [
+      "src/",
+      "src/components/",
+      "src/components/ui/",
+      "src/layouts/",
+      "src/data/",
+      "src/lib/",
+      "src/pages/",
+      "src/styles/",
+      "public/"
+    ],
+    "confirmedPatterns": [
+      "Use the @/ alias for imports under src",
+      "PascalCase .astro component and layout files",
+      "lowercase single-purpose modules in src/data and src/lib",
+      "no semicolons",
+      "single quotes",
+      "2-space indentation",
+      "centralized content and metadata in src/data",
+      "server-first Astro with small inline enhancement scripts",
+      "no client:* islands detected"
+    ]
+  },
+  "hubFeatures": {
+    "configFreshness": true,
+    "sessionLogger": false,
+    "guardrails": true,
+    "versionCheck": true
+  },
+  "boundaries": {
+    "preset": "balanced",
+    "mode": "warn",
+    "stackDefaultsEnabled": true,
+    "appliedStackProfiles": [
+      "git",
+      "nodejs"
+    ]
+  },
+  "managedFiles": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/astro.instructions.md",
+    ".github/instructions/typescript.instructions.md",
+    ".github/instructions/styles.instructions.md",
+    ".github/instructions/commit-message.instructions.md",
+    ".github/agents/code-reviewer.agent.md",
+    ".github/extensions/preflight-hub/extension.mjs",
+    ".github/preflight-boundaries.yaml",
+    ".github/.preflight-state.json",
+    ".vscode/settings.json"
+  ],
+  "reminderDaysThreshold": 30
+}

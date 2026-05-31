@@ -11,3 +11,7 @@
 node_modules/
 dist/
 .astro/
+
+# preflight runtime state
+.copilot/policy-decisions.jsonl
+.copilot/version-cache.json
