@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "pluginVersion": "2.3.0",
+  "lastRun": "2026-05-31T16:19:26.000+02:00",
+  "confirmedStack": {
+    "languages": [
+      "astro",
+      "typescript",
+      "css"
+    ],
+    "framework": {
+      "name": "astro",
+      "version": "6.2.2"
+    },
+    "packageManager": "npm",
+    "testFramework": null,
+    "cicd": "github-actions",
+    "linting": [],
+    "projectType": "single",
+    "targetWorkspaces": [],
+    "keyDirectories": [
+      "src/",
+      "src/components/",
+      "src/components/ui/",
+      "src/data/",
+      "src/layouts/",
+      "src/pages/",
+      "src/styles/",
+      "public/images/"
+    ],
+    "corrections": "landingpage-spec.md is authoritative. Keep the landing page static-first, keep the YouTube flow consent-gated, and keep video zones as pinned highlights plus filtered feed shorts.",
+    "confirmedPatterns": [
+      "zone components live in src/components and are composed from src/pages/index.astro",
+      "shared primitives live in src/components/ui",
+      "customer-facing content and section metadata live in src/data/*.ts",
+      "global design tokens and motion helpers live in src/styles/global.css",
+      "interactive behavior uses small inline scripts inside Astro components instead of a client framework"
+    ]
+  },
+  "hubFeatures": {
+    "configFreshness": false,
+    "sessionLogger": false,
+    "guardrails": false,
+    "versionCheck": false
+  },
+  "managedFiles": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/astro.instructions.md",
+    ".github/instructions/typescript.instructions.md",
+    ".github/instructions/styles.instructions.md",
+    ".github/instructions/commit-message.instructions.md",
+    ".vscode/settings.json",
+    ".github/.preflight-state.json"
+  ]
+}

@@ -7,6 +7,7 @@ import { sectionContent } from '@/data/site';
   data-gallery-lightbox
   aria-labelledby="gallery-lightbox-title"
   aria-describedby="gallery-lightbox-caption"
+  aria-hidden="true"
   style="--lightbox-pad-top:max(0.75rem,env(safe-area-inset-top));--lightbox-pad-right:max(0.75rem,env(safe-area-inset-right));--lightbox-pad-bottom:max(0.75rem,env(safe-area-inset-bottom));--lightbox-pad-left:max(0.75rem,env(safe-area-inset-left));padding:var(--lightbox-pad-top) var(--lightbox-pad-right) var(--lightbox-pad-bottom) var(--lightbox-pad-left);"
   class="fixed inset-0 m-0 h-dvh w-full max-h-none max-w-none items-center justify-center overflow-y-auto overflow-x-hidden border-0 bg-transparent p-0 text-[var(--color-text)] shadow-none backdrop:bg-[rgba(4,6,5,0.88)] backdrop:backdrop-blur-md"
 >
@@ -100,8 +101,12 @@ import { sectionContent } from '@/data/site';
   </div>
 </dialog>
 
-<style>
-  dialog[data-gallery-lightbox][open] {
+<style is:inline>
+  [data-gallery-lightbox] {
+    display: none;
+  }
+
+  [data-gallery-lightbox][open] {
     display: flex;
   }
 </style>
@@ -125,6 +130,10 @@ import { sectionContent } from '@/data/site';
     const defaultEntry = entry?.textContent?.trim() ?? '';
     let lastFocused = null;
 
+    const syncVisibilityState = () => {
+      dialog.setAttribute('aria-hidden', dialog.open ? 'false' : 'true');
+    };
+
     const focusableElements = () =>
       [...dialog.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')].filter(
         (element) => !element.hasAttribute('disabled'),
@@ -134,6 +143,7 @@ import { sectionContent } from '@/data/site';
       if (dialog.open) {
         dialog.close();
       }
+      syncVisibilityState();
       document.body.classList.remove('overflow-hidden');
       if (lastFocused instanceof HTMLElement) {
         lastFocused.focus();
@@ -160,6 +170,7 @@ import { sectionContent } from '@/data/site';
         dialog.showModal();
       }
 
+      syncVisibilityState();
       document.body.classList.add('overflow-hidden');
       requestAnimationFrame(() => {
         const firstButton = closeButtons[0];
@@ -176,6 +187,8 @@ import { sectionContent } from '@/data/site';
     });
 
     closeButtons.forEach((button) => button.addEventListener('click', close));
+
+    syncVisibilityState();
 
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) {
