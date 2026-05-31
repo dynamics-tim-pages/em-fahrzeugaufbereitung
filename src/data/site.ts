@@ -47,6 +47,7 @@ export const heroContent = {
     leading: 'DEIN AUTO IN',
     accent: 'BESTFORM.',
   },
+  backgroundImage: '/images/hero/studio-placeholder.svg',
   subline:
     'Professionelle Innen- und Außenaufbereitung, Politur und Keramik-Versiegelung – für Fahrzeuge aller Art.',
   primaryCta: 'Per WhatsApp anfragen',
@@ -71,6 +72,9 @@ export const sectionContent = {
     title: 'Sieh uns bei der Arbeit zu',
     cta: 'Alle Videos auf YouTube ansehen',
     intro: 'Unsere Highlights und aktuelle Shorts aus dem Studio – komplett im Hochformat, komplett datenschutzfreundlich eingebunden.',
+    highlightsLabel: 'Gepinnte Highlights',
+    feedLabel: 'Aktuelle Shorts aus dem Feed',
+    feedFallback: 'Weitere Shorts werden beim naechsten erfolgreichen Build automatisch ergaenzt.',
   },
   contact: {
     eyebrow: 'KONTAKT',
@@ -106,6 +110,10 @@ export const uiText = {
     loadingHint: 'Startet gleich automatisch',
     badge: 'Short',
     privacyBadge: '2-Klick-Embed',
+    playLabel: 'YouTube laden',
+    consentTitle: 'Datenschutz-Hinweis',
+    confirmLabel: 'Video jetzt laden',
+    cancelLabel: 'Abbrechen',
     privacyNotice:
       'Mit Klick wird ein Video von YouTube geladen – es gelten die Datenschutzbestimmungen von Google.',
   },

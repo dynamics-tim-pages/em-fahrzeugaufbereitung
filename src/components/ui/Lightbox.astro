@@ -7,8 +7,9 @@ import { sectionContent } from '@/data/site';
   data-gallery-lightbox
   aria-labelledby="gallery-lightbox-title"
   aria-describedby="gallery-lightbox-caption"
+  aria-hidden="true"
   style="--lightbox-pad-top:max(0.75rem,env(safe-area-inset-top));--lightbox-pad-right:max(0.75rem,env(safe-area-inset-right));--lightbox-pad-bottom:max(0.75rem,env(safe-area-inset-bottom));--lightbox-pad-left:max(0.75rem,env(safe-area-inset-left));padding:var(--lightbox-pad-top) var(--lightbox-pad-right) var(--lightbox-pad-bottom) var(--lightbox-pad-left);"
-  class="fixed inset-0 m-0 flex h-dvh w-full max-h-none max-w-none items-center justify-center overflow-y-auto overflow-x-hidden border-0 bg-transparent p-0 text-[var(--color-text)] shadow-none backdrop:bg-[rgba(4,6,5,0.88)] backdrop:backdrop-blur-md"
+  class="fixed inset-0 m-0 h-dvh w-full max-h-none max-w-none items-center justify-center overflow-y-auto overflow-x-hidden border-0 bg-transparent p-0 text-[var(--color-text)] shadow-none backdrop:bg-[rgba(4,6,5,0.88)] backdrop:backdrop-blur-md"
 >
   <div class="relative w-[min(100%,74rem)] max-h-[calc(100dvh-var(--lightbox-pad-top)-var(--lightbox-pad-bottom))] overflow-y-auto rounded-[calc(var(--radius-card)+0.75rem)] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(17,21,19,0.98),rgba(10,12,11,1))] shadow-[0_36px_100px_-24px_rgba(0,0,0,0.84)]">
     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,194,54,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_30%,rgba(0,0,0,0.16))]"></div>
@@ -100,6 +101,16 @@ import { sectionContent } from '@/data/site';
   </div>
 </dialog>
 
+<style is:inline>
+  [data-gallery-lightbox] {
+    display: none;
+  }
+
+  [data-gallery-lightbox][open] {
+    display: flex;
+  }
+</style>
+
 <script is:inline>
   (() => {
     const dialog = document.querySelector('[data-gallery-lightbox]');
@@ -119,6 +130,10 @@ import { sectionContent } from '@/data/site';
     const defaultEntry = entry?.textContent?.trim() ?? '';
     let lastFocused = null;
 
+    const syncVisibilityState = () => {
+      dialog.setAttribute('aria-hidden', dialog.open ? 'false' : 'true');
+    };
+
     const focusableElements = () =>
       [...dialog.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')].filter(
         (element) => !element.hasAttribute('disabled'),
@@ -128,6 +143,7 @@ import { sectionContent } from '@/data/site';
       if (dialog.open) {
         dialog.close();
       }
+      syncVisibilityState();
       document.body.classList.remove('overflow-hidden');
       if (lastFocused instanceof HTMLElement) {
         lastFocused.focus();
@@ -154,6 +170,7 @@ import { sectionContent } from '@/data/site';
         dialog.showModal();
       }
 
+      syncVisibilityState();
       document.body.classList.add('overflow-hidden');
       requestAnimationFrame(() => {
         const firstButton = closeButtons[0];
@@ -170,6 +187,8 @@ import { sectionContent } from '@/data/site';
     });
 
     closeButtons.forEach((button) => button.addEventListener('click', close));
+
+    syncVisibilityState();
 
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) {

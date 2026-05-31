@@ -36,6 +36,33 @@ export const gallery = [
     entryLabel: 'Schutz-Finish',
     // src: '/images/gallery/result-3.webp',  // <- später
   },
+  {
+    id: 4,
+    title: 'Handwaesche mit klaren Spiegelungen',
+    caption:
+      'Schonende Pflege, saubere Konturen und ein Lackbild, das unter Studio-Licht sichtbar ruhiger wirkt.',
+    meta: 'Handwaesche',
+    entryLabel: 'Finish-Detail',
+    // src: '/images/gallery/result-4.webp',  // <- später
+  },
+  {
+    id: 5,
+    title: 'Sitzflaechen ohne Flecken und Gerueche',
+    caption:
+      'Gereinigte Polster, frischer Innenraum und ein Gesamtbild, das wieder gepflegt und einladend wirkt.',
+    meta: 'Innenraum',
+    entryLabel: 'Sitz-Detail',
+    // src: '/images/gallery/result-5.webp',  // <- später
+  },
+  {
+    id: 6,
+    title: 'Folienentfernung ohne Rueckstaende',
+    caption:
+      'Saubere Flaechen, klare Linien und ein Fahrzeugauftritt, der wieder wie aus einem Guss wirkt.',
+    meta: 'Rueckstandsfrei',
+    entryLabel: 'Folien-Detail',
+    // src: '/images/gallery/result-6.webp',  // <- später
+  },
 ] as const;
 
 export type GalleryItem = (typeof gallery)[number];
